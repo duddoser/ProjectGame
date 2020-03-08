@@ -15,11 +15,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -43,7 +45,13 @@ public class GameFragment extends Fragment implements OnMapReadyCallback{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_game, container, false);
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getContext());
+        if (getActivity() == null){
+            Log.e("SOSI JOPU", "<3");
+        } else {
+            Log.e("AAAAAAAAAAAAAAA", "<3");
+        }
+
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(getActivity());
         fetchLastLocation();
 
         return view;
@@ -54,25 +62,29 @@ public class GameFragment extends Fragment implements OnMapReadyCallback{
             ActivityCompat.requestPermissions(getActivity(), new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
             return;
         }
-
         Task<Location> task = fusedLocationProviderClient.getLastLocation();
         task.addOnSuccessListener(location -> {
             if (location != null){
+                Log.e("NOT NULL", "YEEEEEES");
                 currentLocation = location;
+                Toast.makeText(getContext(), (currentLocation.getLatitude() + " " + currentLocation.
+                        getLongitude()), Toast.LENGTH_LONG).show();
                 get_map();
             }
         });
     }
 
     public void get_map(){
-        SupportMapFragment maps = (SupportMapFragment) getActivity().getSupportFragmentManager()
+        MapFragment maps = (MapFragment) getActivity().getFragmentManager()
                 .findFragmentById(R.id.map);
+        if (maps == null){
+            Log.e("DFGSDFHSFGH", "SDGSDFHDFH");
+        }
         maps.getMapAsync(this);
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        //Log.e("BBBBBBBBB", "BBBBBBBB");
         LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("Hey");
         googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
@@ -90,3 +102,4 @@ public class GameFragment extends Fragment implements OnMapReadyCallback{
         }
     }
 }
+

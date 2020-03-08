@@ -6,9 +6,11 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.common.api.ApiException;
@@ -36,39 +38,43 @@ import java.util.List;
 import static java.security.AccessController.getContext;
 
 public class Maps extends FragmentActivity implements OnMapReadyCallback {
-    public SupportMapFragment mapFragment;
     String mapsApiKey = "AIzaSyAeYuBs3a_jNV76ZmQ2FYEPkcM3u_zXwUc";
+    private Activity activity;
     private Location currentLocation;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private static final int REQUEST_CODE = 101;
 
-    public Maps(SupportMapFragment mapFragment){
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this);
+    public Maps(Activity activity){
+        this.activity = activity;
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this.activity);
         fetchLastLocation();
-        this.mapFragment = mapFragment;
     }
 
     private void fetchLastLocation() {
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+        if (ActivityCompat.checkSelfPermission(this.activity.getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this.activity, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
             return;
         }
-
         Task<Location> task = fusedLocationProviderClient.getLastLocation();
-        task.addOnSuccessListener(new OnSuccessListener<Location>() {
-            @Override
-            public void onSuccess(Location location) {
-                if (location != null){
-                    currentLocation = location;
-                }
+        task.addOnSuccessListener(location -> {
+            if (location != null){
+                Log.e("NOT NULL", "YEEEEEES");
+                currentLocation = location;
+                Toast.makeText(this.activity.getApplicationContext(), (currentLocation.getLatitude() + " " + currentLocation.
+                        getLongitude()), Toast.LENGTH_LONG).show();
+                get_map();
             }
         });
-        this.mapFragment.getMapAsync(this);
+    }
+
+    public void get_map(){
+        SupportMapFragment maps = (SupportMapFragment) getSupportFragmentManager()
+                .findFragmentById(R.id.map);
+        maps.getMapAsync(this);
     }
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        Log.e("BBBBBBBBB", "BBBBBBBB");
         LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("Hey");
         googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
