@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "538592569142",
+    "firebase_url": "https://project-game-d851e.firebaseio.com",
+    "project_id": "project-game-d851e",
+    "storage_bucket": "project-game-d851e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:538592569142:android:3bb779a7a86ea4cb947597",
+        "android_client_info": {
+          "package_name": "com.example.projectgame"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "538592569142-l4v652cpd7bjb5gv2096vg9gngohjmvh.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyANqJWBbsFYwKV0etH5vP2CIK71wYZH5Ao"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "538592569142-l4v652cpd7bjb5gv2096vg9gngohjmvh.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
