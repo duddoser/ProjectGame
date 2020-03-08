@@ -14,8 +14,6 @@ import android.widget.Button;
 public class StartFragment extends Fragment implements View.OnClickListener{
     private View view;
     private Button startButton, settingsButton;
-    // key = AIzaSyAeYuBs3a_jNV76ZmQ2FYEPkcM3u_zXwUc
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

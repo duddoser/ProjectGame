@@ -2,6 +2,7 @@
     <string name="app_name">Project Game</string>
     <string name="start_button">Start</string>
     <string name="settings_button">Settings</string>
+    <string name="google_maps_key">AIzaSyAeYuBs3a_jNV76ZmQ2FYEPkcM3u_zXwUc</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
