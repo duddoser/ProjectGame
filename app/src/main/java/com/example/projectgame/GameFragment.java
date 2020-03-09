@@ -35,18 +35,15 @@ import com.google.android.gms.tasks.Task;
  */
 public class GameFragment extends Fragment {
     private View view;
-    String mapsApiKey = "AIzaSyAeYuBs3a_jNV76ZmQ2FYEPkcM3u_zXwUc";
-    private Location currentLocation;
-    private FusedLocationProviderClient fusedLocationProviderClient;
-    private static final int REQUEST_CODE = 101;
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_game, container, false);
+        new MusicPlayer(this);
         new Maps(this);
 
         return view;
     }
+
 }
