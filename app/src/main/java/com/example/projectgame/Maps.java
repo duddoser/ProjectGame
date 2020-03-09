@@ -20,6 +20,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -39,28 +40,30 @@ import static java.security.AccessController.getContext;
 
 public class Maps extends FragmentActivity implements OnMapReadyCallback {
     String mapsApiKey = "AIzaSyAeYuBs3a_jNV76ZmQ2FYEPkcM3u_zXwUc";
-    private Activity activity;
+    private GameFragment gameFragment;
     private Location currentLocation;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private static final int REQUEST_CODE = 101;
 
-    public Maps(Activity activity){
-        this.activity = activity;
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this.activity);
+    public Maps(GameFragment gameFragment){
+        this.gameFragment = gameFragment;
+        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this.gameFragment.getActivity());
         fetchLastLocation();
     }
 
     private void fetchLastLocation() {
-        if (ActivityCompat.checkSelfPermission(this.activity.getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(this.activity, new String[] {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
+        if (ActivityCompat.checkSelfPermission(this.gameFragment.getContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this.gameFragment.getActivity(), new String[]
+                    {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
             return;
         }
         Task<Location> task = fusedLocationProviderClient.getLastLocation();
         task.addOnSuccessListener(location -> {
             if (location != null){
-                Log.e("NOT NULL", "YEEEEEES");
                 currentLocation = location;
-                Toast.makeText(this.activity.getApplicationContext(), (currentLocation.getLatitude() + " " + currentLocation.
+                Toast.makeText(this.gameFragment.getContext(), (currentLocation.getLatitude()
+                        + " " + currentLocation.
                         getLongitude()), Toast.LENGTH_LONG).show();
                 get_map();
             }
@@ -68,7 +71,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
     }
 
     public void get_map(){
-        SupportMapFragment maps = (SupportMapFragment) getSupportFragmentManager()
+        MapFragment maps = (MapFragment) this.gameFragment.getActivity().getFragmentManager()
                 .findFragmentById(R.id.map);
         maps.getMapAsync(this);
     }
@@ -77,8 +80,9 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions().position(latLng).title("Hey");
-        googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
-        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 5));
+        LatLng latLng2 = new LatLng(55.75222, 37.6155600);
+        googleMap.animateCamera(CameraUpdateFactory.newLatLng(latLng2));
+        googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng2, 10));
         googleMap.addMarker(markerOptions);
     }
 
