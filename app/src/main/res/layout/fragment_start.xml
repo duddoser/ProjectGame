@@ -11,9 +11,11 @@
         android:id="@+id/start_button"
         style="@android:style/Widget.Button.Inset"
         android:layout_width="151dp"
-        android:layout_height="60dp"
+        android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="33dp"
+        android:layout_marginTop="561dp"
+        android:layout_marginBottom="22dp"
+        android:background="@color/buttonBackground"
         android:text="@string/start_button"
         android:textColorHighlight="#000C0C0C"
         android:textColorLink="#00070707"
@@ -22,22 +24,21 @@
         app:layout_constraintBottom_toTopOf="@+id/settings_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:background="@color/buttonBackground"
-        />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/settings_button"
         style="@android:style/Widget.Button.Inset"
         android:layout_width="151dp"
-        android:layout_height="60dp"
+        android:layout_height="0dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="152dp"
+        android:layout_marginBottom="28dp"
+        android:background="@color/buttonBackground"
         android:text="@string/settings_button"
         android:textSize="26sp"
-        android:background="@color/buttonBackground"
         app:fontFamily="@font/myfont"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>
