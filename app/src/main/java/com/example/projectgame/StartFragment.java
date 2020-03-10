@@ -34,6 +34,7 @@ public class StartFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         if (v == startButton){
             musicPlayer.stopPlaying();
+            //((NavigationHost) getActivity()).navigateTo(new LoginFragment(), true);
             ((NavigationHost) getActivity()).navigateTo(new GameFragment(), true);
         }
 
