@@ -30,9 +30,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class GameFragment extends Fragment {
     private View view;
 
