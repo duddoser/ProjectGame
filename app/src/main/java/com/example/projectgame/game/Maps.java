@@ -45,13 +45,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Maps extends FragmentActivity implements OnMapReadyCallback {
-    String mapsApiKey = "AIzaSyAA70qPMcdLXusRSbY_LSzT_zhtm9lv3pg";
+    String mapsApiKey = "AIzaSyAeYuBs3a_jNV76ZmQ2FYEPkcM3u_zXwUc";
     private GameFragment gameFragment;
     private Location currentLocation;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private static final int REQUEST_CODE = 101;
-
-    private List<String> LatLngs;
     private static final LatLng CENTRE = new LatLng(55.75222, 37.6155600);
 
 
@@ -59,12 +57,6 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
         this.gameFragment = gameFragment;
         fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this.gameFragment.getActivity());
         fetchLastLocation();
-
-        LatLngs = new ArrayList<>();
-        LatLngs.add("55.7990012,37.688255");
-        LatLngs.add("55.8502375,37.5564886");
-        LatLngs.add("55.7081147,37.4315135");
-        LatLngs.add("55.5999727,37.6072545");
     }
 
     private void fetchLastLocation() {
@@ -94,13 +86,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        GeoApiContext geoApiContext = new GeoApiContext.Builder()
-                .apiKey(mapsApiKey)
-                .build();
         draw(googleMap);
-//        for (int i=0;i<4;i++){
-//            makeResult(geoApiContext, LatLngs.get(i), googleMap);
-//        }
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(CENTRE, 10));
 
         try {
@@ -177,7 +163,8 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
         MarkerOptions markerOptions = new MarkerOptions().position(latLng).
                 icon(BitmapDescriptorFactory.fromResource(R.drawable.marker));
         gM.addMarker(markerOptions);
-        //new Coordinates(gM);
+
+
     }
 
     @Override
