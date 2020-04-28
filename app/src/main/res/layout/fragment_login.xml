@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginFragment">
+    tools:context=".before_game.LoginFragment"
+    android:clipChildren="false"
+    android:clipToPadding="false"
+    android:orientation="vertical"
+    android:padding="24dp"
+    android:paddingTop="16dp">
 
     <EditText
         android:id="@+id/name"
         android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="185dp"
+        android:layout_gravity="center_horizontal"
         android:ems="10"
         android:fontFamily="@font/myfont"
         android:inputType="textPersonName"
         android:text="@string/name"
-        android:textColor="@color/colorPrimaryDark"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textColor="@color/colorPrimaryDark" />
 
     <EditText
         android:id="@+id/password"
@@ -26,12 +29,10 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="19dp"
         android:ems="10"
+        android:layout_gravity="center_horizontal"
         android:fontFamily="@font/myfont"
         android:hint="@string/password"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        android:inputType="textPassword" />
 
     <EditText
         android:id="@+id/email"
@@ -39,21 +40,42 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="11dp"
         android:ems="10"
+        android:layout_gravity="center_horizontal"
         android:inputType="textEmailAddress"
-        android:hint="@string/email"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+        android:hint="@string/email" />
 
     <Button
-        android:id="@+id/login_button"
-        android:layout_width="wrap_content"
+        style="@style/Widget.AppCompat.Button.Borderless"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="103dp"
-        android:fontFamily="@font/myfont"
-        android:layout_marginLeft="103dp"
-        android:layout_marginTop="34dp"
-        android:text="@string/login"
-        app:layout_constraintStart_toStartOf="@+id/email"
-        app:layout_constraintTop_toBottomOf="@+id/email" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_gravity="center_horizontal"
+        android:text="@string/sign_up"
+        android:layout_marginTop="20dp"
+        android:textAlignment="viewStart"
+        android:textSize="10sp" />
+
+    <LinearLayout
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="35dp"
+        android:layout_gravity="center_horizontal">
+        <Button
+            android:id="@+id/login_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34dp"
+            android:fontFamily="@font/myfont"
+            android:text="@string/login"
+            android:layout_gravity="center_horizontal" />
+        <Button
+            android:id="@+id/cancel_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="34dp"
+            android:fontFamily="@font/myfont"
+            android:text="@string/cancel"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
+
+</LinearLayout>

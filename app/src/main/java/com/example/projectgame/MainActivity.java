@@ -4,19 +4,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.provider.MediaStore;
 
-import java.io.File;
+import com.example.projectgame.before_game.StartFragment;
 
 public class MainActivity extends AppCompatActivity implements NavigationHost{
+    private MediaPlayer mediaPlayer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //MusicPlayer musicPlayer = new MusicPlayer(this);
         setContentView(R.layout.activity_main);
+
+        mediaPlayer = MediaPlayer.create(this, R.raw.gamemusic);
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mediaPlayer.setLooping(true);
+        mediaPlayer.start();
 
         if (savedInstanceState == null){
             navigateTo(new StartFragment(), false);

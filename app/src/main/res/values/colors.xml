@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#D81B60</color>
     <color name="buttonBackground">#FFF9DC</color>
+    <color name="resButton">#996633</color>
+    <color name="polyline">#AB781F</color>
 </resources>
