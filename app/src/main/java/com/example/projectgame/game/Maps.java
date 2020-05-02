@@ -45,7 +45,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Maps extends FragmentActivity implements OnMapReadyCallback {
-    String mapsApiKey = "AIzaSyAeYuBs3a_jNV76ZmQ2FYEPkcM3u_zXwUc";
     private GameFragment gameFragment;
     private Location currentLocation;
     private FusedLocationProviderClient fusedLocationProviderClient;
