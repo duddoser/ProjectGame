@@ -8,19 +8,21 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.example.projectgame.NavigationHost;
+import com.example.projectgame.OnBackPressedListener;
 import com.example.projectgame.R;
 import com.example.projectgame.before_game.LoginFragment;
 import com.example.projectgame.before_game.SettingsFragment;
 import com.example.projectgame.game.GameFragment;
 
 
-public class StartFragment extends Fragment implements View.OnClickListener{
+public class StartFragment extends Fragment implements View.OnClickListener, OnBackPressedListener{
     private View view;
     private Button startButton, settingsButton;
     private MediaPlayer mediaPlayer;
@@ -44,6 +46,7 @@ public class StartFragment extends Fragment implements View.OnClickListener{
     public void onClick(View v) {
         if (v == startButton){
             if (checkSharedPref()){
+                Log.e("WTF", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
                 ((NavigationHost) getActivity()).navigateTo(new GameFragment(), true);
             } else {
                 ((NavigationHost) getActivity()).navigateTo(new LoginFragment(), false);
@@ -63,5 +66,10 @@ public class StartFragment extends Fragment implements View.OnClickListener{
             return true;
         }
         return false;
+    }
+
+    @Override
+    public void onBackPressed() {
+        getChildFragmentManager().popBackStack();
     }
 }

@@ -6,11 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".game.GameFragment">
 
-    <fragment
+    <com.google.android.gms.maps.MapView
         android:id="@+id/map"
-        android:name="com.google.android.gms.maps.MapFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:apiKey="@string/google_api_key"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,6 +37,7 @@
             android:text="@string/wood"
             android:textColor="@color/buttonBackground"
             android:textSize="10sp"
+            app:iconTint="@null"
             app:icon="@drawable/woods"
             app:backgroundTint="@color/resButton"
             app:cornerRadius="20dp" />
@@ -52,6 +53,7 @@
             android:textColor="@color/buttonBackground"
             android:textSize="10sp"
             app:backgroundTint="@color/resButton"
+            app:iconTint="@null"
             app:icon="@drawable/iron"
             app:cornerRadius="20dp" />
 
@@ -65,6 +67,7 @@
             android:text="@string/metal"
             android:textColor="@color/buttonBackground"
             android:textSize="10sp"
+            app:iconTint="@null"
             app:icon="@drawable/metal"
             app:backgroundTint="@color/resButton"
             app:cornerRadius="20dp" />
@@ -79,6 +82,7 @@
             android:text="@string/stone"
             android:textColor="@color/buttonBackground"
             android:textSize="10sp"
+            app:iconTint="@null"
             app:icon="@drawable/stone"
             app:backgroundTint="@color/resButton"
             app:cornerRadius="20dp" />

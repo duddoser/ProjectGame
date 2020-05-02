@@ -5,5 +5,8 @@
     <color name="colorAccent">#D81B60</color>
     <color name="buttonBackground">#FFF9DC</color>
     <color name="resButton">#996633</color>
-    <color name="polyline">#AB781F</color>
+    <color name="polygonW">#80166711</color>
+    <color name="polygonS">#80686c75</color>
+    <color name="polygonI">#8001085A</color>
+    <color name="polygonM">#80FF8F18</color>
 </resources>

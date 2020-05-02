@@ -5,12 +5,14 @@ import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.location.Location;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.example.projectgame.R;
 import com.example.projectgame.game.GameFragment;
@@ -20,7 +22,9 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
@@ -45,17 +49,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Maps extends FragmentActivity implements OnMapReadyCallback {
-    String mapsApiKey = "AIzaSyAeYuBs3a_jNV76ZmQ2FYEPkcM3u_zXwUc";
     private GameFragment gameFragment;
     private Location currentLocation;
     private FusedLocationProviderClient fusedLocationProviderClient;
     private static final int REQUEST_CODE = 101;
+    private Bundle savedInstanceState;
     private static final LatLng CENTRE = new LatLng(55.75222, 37.6155600);
 
 
-    public Maps(GameFragment gameFragment){
+    public Maps(GameFragment gameFragment, Bundle savedInstanceState){
         this.gameFragment = gameFragment;
-        fusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(this.gameFragment.getActivity());
+        this.savedInstanceState = savedInstanceState;
+        fusedLocationProviderClient = LocationServices.
+                getFusedLocationProviderClient(this.gameFragment.getActivity());
         fetchLastLocation();
     }
 
@@ -66,22 +72,19 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
                     {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
             return;
         }
-        Task<Location> task = fusedLocationProviderClient.getLastLocation();
+        Task<Location> task = fusedLocationProviderClient.getLastLocation(); // во-первых СХС во-вторых измени на mapView
         task.addOnSuccessListener(location -> {
             if (location != null){
                 currentLocation = location;
-                Toast.makeText(this.gameFragment.getContext(), (currentLocation.getLatitude()
-                        + " " + currentLocation.
-                        getLongitude()), Toast.LENGTH_LONG).show();
                 get_map();
             }
         });
     }
 
-    public void get_map(){
-        MapFragment maps = (MapFragment) this.gameFragment.getActivity().getFragmentManager()
-                .findFragmentById(R.id.map);
-        maps.getMapAsync(this);
+    private void get_map() {
+        MapView mView = this.gameFragment.getView().findViewById(R.id.map);
+        mView.onCreate(savedInstanceState);
+        mView.getMapAsync(this);
     }
 
     @Override
@@ -101,70 +104,12 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
         }
     }
 
-    public void makeResult(GeoApiContext geoApiContext, String destination, GoogleMap gM){
-        List<LatLng> path = new ArrayList<>();
-        Log.e("AAAAAAAAAAAAA", "BBBBBBBBBBBB");
-
-        DirectionsApiRequest req = DirectionsApi.getDirections(geoApiContext,
-                "55.75222,37.6155600", destination);
-        try {
-            DirectionsResult res = req.await();
-            if (res.routes != null && res.routes.length > 0) {
-                DirectionsRoute route = res.routes[0];
-
-                if (route.legs !=null) {
-                    for(int i=0; i<route.legs.length; i++) {
-                        DirectionsLeg leg = route.legs[i];
-                        if (leg.steps != null) {
-                            for (int j=0; j<leg.steps.length;j++){
-                                DirectionsStep step = leg.steps[j];
-                                if (step.steps != null && step.steps.length >0) {
-                                    for (int k=0; k<step.steps.length;k++){
-                                        DirectionsStep step1 = step.steps[k];
-                                        EncodedPolyline points1 = step1.polyline;
-                                        if (points1 != null) {
-                                            List<com.google.maps.model.LatLng> coords1 =
-                                                    points1.decodePath();
-                                            for (com.google.maps.model.LatLng coord1 : coords1) {
-                                                path.add(new LatLng(coord1.lat, coord1.lng));
-                                                Log.e("PATH", "ADDED");
-                                            }
-                                        }
-                                    }
-                                } else {
-                                    EncodedPolyline points = step.polyline;
-                                    if (points != null) {
-                                        List<com.google.maps.model.LatLng> coords = points.
-                                                decodePath();
-                                        for (com.google.maps.model.LatLng coord : coords) {
-                                            path.add(new LatLng(coord.lat, coord.lng));
-                                            Log.e("PATH", "ADDED");
-                                        }
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        } catch(Exception ex) {
-            Log.e("RESULT ERROR", ex.getLocalizedMessage());
-        }
-        if (path.size() > 0) {
-            PolylineOptions opts = new PolylineOptions().addAll(path).color(R.color.polyline).
-                    width(15);
-            gM.addPolyline(opts);
-        }
-
-    }
-
     public void draw(GoogleMap gM){
         LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions().position(latLng).
                 icon(BitmapDescriptorFactory.fromResource(R.drawable.marker));
         gM.addMarker(markerOptions);
-
-
+        new Coordinates(gM, this.gameFragment.getContext());
     }
 
     @Override
