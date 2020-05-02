@@ -72,7 +72,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
                     {Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_CODE);
             return;
         }
-        Task<Location> task = fusedLocationProviderClient.getLastLocation(); // во-первых СХС во-вторых измени на mapView
+        Task<Location> task = fusedLocationProviderClient.getLastLocation();
         task.addOnSuccessListener(location -> {
             if (location != null){
                 currentLocation = location;
