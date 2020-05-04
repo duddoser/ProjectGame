@@ -46,7 +46,6 @@ public class StartFragment extends Fragment implements View.OnClickListener, OnB
     public void onClick(View v) {
         if (v == startButton){
             if (checkSharedPref()){
-                Log.e("WTF", "FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
                 ((NavigationHost) getActivity()).navigateTo(new GameFragment(), true);
             } else {
                 ((NavigationHost) getActivity()).navigateTo(new LoginFragment(), false);

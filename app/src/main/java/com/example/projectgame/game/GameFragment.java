@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
+import com.example.projectgame.NavigationHost;
 import com.example.projectgame.OnBackPressedListener;
 import com.example.projectgame.R;
 import com.google.android.gms.maps.GoogleMap;
@@ -22,17 +23,23 @@ import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.SupportMapFragment;
 
 
-public class GameFragment extends Fragment implements OnBackPressedListener{
+public class GameFragment extends Fragment implements OnBackPressedListener, View.OnClickListener {
     private View view;
-    private GoogleMap mMap;
+    private Button btnMarket;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_game, container, false);
-        Button btn1 = view.findViewById(R.id.btnI);
+
         new Maps(this, savedInstanceState);
         return view;
+    }
+
+    public void init_views(){
+        btnMarket = view.findViewById(R.id.btnMarket);
+        btnMarket.setOnClickListener(this);
     }
 
     @Override
@@ -40,4 +47,10 @@ public class GameFragment extends Fragment implements OnBackPressedListener{
         getChildFragmentManager().popBackStack();
     }
 
+    @Override
+    public void onClick(View v) {
+        if (v == btnMarket){
+            ((NavigationHost) getActivity()).navigateTo(new MarketFragment(), true);
+        }
+    }
 }

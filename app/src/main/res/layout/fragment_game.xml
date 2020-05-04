@@ -8,20 +8,18 @@
 
     <com.google.android.gms.maps.MapView
         android:id="@+id/map"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="411dp"
+        android:layout_height="731dp"
         android:apiKey="@string/google_api_key"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
         tools:context=".game.GameFragment" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="match_parent"
-        android:layout_height="42dp"
-        android:layout_marginBottom="115dp"
+        android:layout_width="411dp"
+        android:layout_height="59dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,10 +35,10 @@
             android:text="@string/wood"
             android:textColor="@color/buttonBackground"
             android:textSize="10sp"
-            app:iconTint="@null"
-            app:icon="@drawable/woods"
             app:backgroundTint="@color/resButton"
-            app:cornerRadius="20dp" />
+            app:cornerRadius="20dp"
+            app:icon="@drawable/woods"
+            app:iconTint="@null" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnI"
@@ -53,9 +51,9 @@
             android:textColor="@color/buttonBackground"
             android:textSize="10sp"
             app:backgroundTint="@color/resButton"
-            app:iconTint="@null"
+            app:cornerRadius="20dp"
             app:icon="@drawable/iron"
-            app:cornerRadius="20dp" />
+            app:iconTint="@null" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnM"
@@ -67,10 +65,10 @@
             android:text="@string/metal"
             android:textColor="@color/buttonBackground"
             android:textSize="10sp"
-            app:iconTint="@null"
-            app:icon="@drawable/metal"
             app:backgroundTint="@color/resButton"
-            app:cornerRadius="20dp" />
+            app:cornerRadius="20dp"
+            app:icon="@drawable/metal"
+            app:iconTint="@null" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnS"
@@ -82,12 +80,26 @@
             android:text="@string/stone"
             android:textColor="@color/buttonBackground"
             android:textSize="10sp"
-            app:iconTint="@null"
-            app:icon="@drawable/stone"
             app:backgroundTint="@color/resButton"
-            app:cornerRadius="20dp" />
+            app:cornerRadius="20dp"
+            app:icon="@drawable/stone"
+            app:iconTint="@null" />
 
 
     </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnMarket"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+        android:layout_width="64dp"
+        android:layout_height="59dp"
+
+        android:layout_marginEnd="40dp"
+        android:layout_marginRight="40dp"
+        android:layout_marginBottom="56dp"
+        app:iconTint="@null"
+        app:layout_constraintBottom_toBottomOf="@+id/map"
+        app:layout_constraintEnd_toEndOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
