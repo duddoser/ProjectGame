@@ -3,6 +3,7 @@ package com.example.projectgame.game;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -50,9 +51,9 @@ public class ResourceAdapter extends RecyclerView.Adapter<ResourceAdapter.ViewHo
         int num2 = amount2.get(position);
 
         holder.imageView.setImageDrawable(imageSelect(m));
-        holder.tvGet.setText(num);
+        holder.tvGet.setText(Integer.toString(num));
         holder.imageView2.setImageDrawable(imageSelect(m2));
-        holder.tvGive.setText(num2);
+        holder.tvGive.setText(Integer.toString(num2));
     }
 
     public Drawable imageSelect(String resource){
@@ -66,7 +67,7 @@ public class ResourceAdapter extends RecyclerView.Adapter<ResourceAdapter.ViewHo
             case "iron":
                 return this.context.getResources().getDrawable(R.drawable.iron);
         }
-        return null;
+        return this.context.getResources().getDrawable(R.drawable.iron);
     }
 
     @Override
@@ -84,19 +85,14 @@ public class ResourceAdapter extends RecyclerView.Adapter<ResourceAdapter.ViewHo
             tvGet = itemView.findViewById(R.id.tvGet);
             tvGive = itemView.findViewById(R.id.tvGive);
             imageView = itemView.findViewById(R.id.image);
-            imageView = itemView.findViewById(R.id.image2);
-            btn = itemView.findViewById(R.id.btnMarket);
-            btn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    //
-                }
-            });
+            imageView2 = itemView.findViewById(R.id.image2);
+            btn = itemView.findViewById(R.id.btnBuy);
+            btn.setOnClickListener(v -> btn.setText("sold"));
         }
 
         @Override
         public void onClick(View v) {
-
+            Log.e("EVERYTHING IS OK","okkkkkkkkk");
         }
     }
 }

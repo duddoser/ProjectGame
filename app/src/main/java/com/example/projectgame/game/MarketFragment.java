@@ -35,6 +35,16 @@ public class MarketFragment extends Fragment {
         material2 = new ArrayList<>();
         amount = new ArrayList<>();
         amount2 = new ArrayList<>();
+
+        material.add("stone");
+        material.add("wood");
+        material2.add("wood");
+        material2.add("stone");
+        amount.add(44);
+        amount.add(99);
+        amount2.add(78);
+        amount2.add(87);
+
         adapter = new ResourceAdapter(getContext(), material, amount, material2, amount2);
 
         recyclerView = view.findViewById(R.id.recyclerView);

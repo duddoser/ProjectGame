@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,7 @@ public class GameFragment extends Fragment implements OnBackPressedListener, Vie
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_game, container, false);
-
+        init_views();
         new Maps(this, savedInstanceState);
         return view;
     }
@@ -50,6 +51,7 @@ public class GameFragment extends Fragment implements OnBackPressedListener, Vie
     @Override
     public void onClick(View v) {
         if (v == btnMarket){
+            Log.e("WTDDDD", "FFFFFFFFFFFFFF");
             ((NavigationHost) getActivity()).navigateTo(new MarketFragment(), true);
         }
     }

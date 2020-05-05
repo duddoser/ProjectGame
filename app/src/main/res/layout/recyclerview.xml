@@ -37,6 +37,7 @@
         android:fontFamily="@font/myfont"/>
 
     <Button
+        android:id="@+id/btnBuy"
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:textSize="15sp"
