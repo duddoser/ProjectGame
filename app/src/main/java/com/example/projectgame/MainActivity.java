@@ -10,8 +10,10 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import com.example.projectgame.before_game.StartFragment;
+import com.example.projectgame.game.MediaPlayerInterface;
 
-public class MainActivity extends AppCompatActivity implements NavigationHost, OnBackPressedListener{
+public class MainActivity extends AppCompatActivity implements NavigationHost, OnBackPressedListener,
+        MediaPlayerInterface {
     private MediaPlayer mediaPlayer;
 
     @Override
@@ -59,6 +61,23 @@ public class MainActivity extends AppCompatActivity implements NavigationHost, O
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mediaPlayer.pause();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mediaPlayer.start();
+    }
+
+    @Override
+    public void pauseMediaPlayer() {
+        mediaPlayer.pause();
     }
 }
 

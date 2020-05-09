@@ -18,9 +18,10 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="411dp"
-        android:layout_height="59dp"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
         android:orientation="horizontal"
+        android:backgroundTint="@null"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -90,10 +91,10 @@
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btnMarket"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-        android:layout_width="64dp"
-        android:layout_height="59dp"
-
+        style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+        android:layout_width="80dp"
+        android:layout_height="68dp"
+        app:icon="@drawable/market"
         android:layout_marginEnd="40dp"
         android:layout_marginRight="40dp"
         android:layout_marginBottom="56dp"

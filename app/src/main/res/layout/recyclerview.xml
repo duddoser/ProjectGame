@@ -2,45 +2,66 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:layout_height="48dp"
+    android:orientation="vertical"
+    android:background="@color/buttonBackground">
 
-    <ImageView
-        android:id="@+id/image"
-        android:layout_width="32dp"
-        android:layout_height="32dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:background="@color/buttonBackground">
 
-    <TextView
-        android:id="@+id/tvGet"
-        android:layout_width="wrap_content"
-        android:layout_height="32dp"
-        android:textSize="12sp"
-        android:fontFamily="@font/myfont"/>
+        <ImageView
+            android:id="@+id/image"
+            android:layout_height="32dp"
+            android:layout_weight="1"
+            android:layout_width="0dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="32dp"
-        android:textSize="12sp"
-        android:text="@string/trade"
-        android:fontFamily="@font/myfont"/>
+        <TextView
+            android:id="@+id/tvGet"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="25sp"
+            android:fontFamily="@font/myfont"/>
 
-    <ImageView
-        android:id="@+id/image2"
-        android:layout_width="32dp"
-        android:layout_height="32dp" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:textSize="28sp"
+            android:layout_weight="3"
+            android:text="@string/trade"
+            android:fontFamily="@font/myfont"/>
 
-    <TextView
-        android:id="@+id/tvGive"
-        android:layout_width="wrap_content"
-        android:layout_height="32dp"
-        android:textSize="12sp"
-        android:fontFamily="@font/myfont"/>
+        <ImageView
+            android:id="@+id/image2"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="32dp" />
+
+        <TextView
+            android:id="@+id/tvGive"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textSize="25sp"
+            android:fontFamily="@font/myfont"/>
+
+        <com.google.android.material.button.MaterialButton
+            android:backgroundTint="@color/resButton"
+            android:id="@+id/btnBuy"
+            android:layout_width="0dp"
+            android:layout_weight="2"
+            android:layout_height="match_parent"
+            android:textSize="15sp"
+            android:text="@string/btnBuy"
+            android:fontFamily="@font/myfont"/>
+    </LinearLayout>
 
     <Button
-        android:id="@+id/btnBuy"
-        android:layout_width="32dp"
-        android:layout_height="32dp"
-        android:textSize="15sp"
-        android:text="@string/btnBuy"/>
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="@color/colorPrimaryDark"/>
 
 </LinearLayout>

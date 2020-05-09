@@ -3,6 +3,10 @@ package com.example.projectgame.game;
 
 import android.app.Activity;
 import android.content.Context;
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -28,7 +32,6 @@ public class GameFragment extends Fragment implements OnBackPressedListener, Vie
     private View view;
     private Button btnMarket;
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -51,7 +54,7 @@ public class GameFragment extends Fragment implements OnBackPressedListener, Vie
     @Override
     public void onClick(View v) {
         if (v == btnMarket){
-            Log.e("WTDDDD", "FFFFFFFFFFFFFF");
+            ((MediaPlayerInterface) getActivity()).pauseMediaPlayer();
             ((NavigationHost) getActivity()).navigateTo(new MarketFragment(), true);
         }
     }

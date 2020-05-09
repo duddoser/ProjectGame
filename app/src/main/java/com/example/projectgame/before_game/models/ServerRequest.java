@@ -1,6 +1,6 @@
-package com.example.projectgame.models;
+package com.example.projectgame.before_game.models;
 
-public class SeverRequest {
+public class ServerRequest {
     private String operation;
     private User user;
 

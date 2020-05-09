@@ -1,5 +1,9 @@
 package com.example.projectgame.game;
 
+import android.media.AudioAttributes;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -17,6 +21,7 @@ import java.util.List;
 
 public class MarketFragment extends Fragment {
     public View view;
+    private MediaPlayer mP;
     private RecyclerView recyclerView;
     private ResourceAdapter adapter;
     List<String> material, material2;
@@ -27,6 +32,10 @@ public class MarketFragment extends Fragment {
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_market, container, false);
         initRecycleAndViews();
+        mP = MediaPlayer.create(getContext(), R.raw.opened_door);
+        mP.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mP.start();
+
         return view;
     }
 
@@ -46,7 +55,6 @@ public class MarketFragment extends Fragment {
         amount2.add(87);
 
         adapter = new ResourceAdapter(getContext(), material, amount, material2, amount2);
-
         recyclerView = view.findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);

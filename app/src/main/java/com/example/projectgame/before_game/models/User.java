@@ -1,4 +1,4 @@
-package com.example.projectgame.models;
+package com.example.projectgame.before_game.models;
 
 public class User {
     private String name;

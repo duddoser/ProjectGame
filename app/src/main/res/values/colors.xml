@@ -9,4 +9,5 @@
     <color name="polygonS">#80686c75</color>
     <color name="polygonI">#8001085A</color>
     <color name="polygonM">#80FF8F18</color>
+    <color name="recyclerView">#795548</color>
 </resources>
