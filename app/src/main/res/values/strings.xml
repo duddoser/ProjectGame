@@ -21,6 +21,8 @@
     <string name="btnBuy">BUY</string>
     <string name="trade">Trade for</string>
     <string name="btnTrade">New trade</string>
+    <string name="btnNewTrade">Trade</string>
+    <string name="tvFor">for</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">hi</string>

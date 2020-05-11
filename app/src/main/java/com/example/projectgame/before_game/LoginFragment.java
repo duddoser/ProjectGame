@@ -4,7 +4,6 @@ package com.example.projectgame.before_game;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,19 +13,7 @@ import android.widget.EditText;
 import androidx.fragment.app.Fragment;
 
 import com.example.projectgame.Consts;
-import com.example.projectgame.NavigationHost;
 import com.example.projectgame.R;
-import com.example.projectgame.before_game.models.RequestInterface;
-import com.example.projectgame.before_game.models.ServerRequest;
-import com.example.projectgame.before_game.models.ServerResponse;
-import com.example.projectgame.before_game.models.User;
-import com.example.projectgame.game.GameFragment;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class LoginFragment extends Fragment implements View.OnClickListener {

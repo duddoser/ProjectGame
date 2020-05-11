@@ -7,6 +7,79 @@
     android:orientation="vertical"
     tools:context=".game.MarketFragment">
 
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:backgroundTint="@null"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnW"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/myfont"
+            android:text="@string/wood"
+            android:textColor="@color/buttonBackground"
+            android:textSize="10sp"
+            app:backgroundTint="@color/resButton"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/woods"
+            app:iconTint="@null" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnI"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/myfont"
+            android:text="@string/iron"
+            android:textColor="@color/buttonBackground"
+            android:textSize="10sp"
+            app:backgroundTint="@color/resButton"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/iron"
+            app:iconTint="@null" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnM"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/myfont"
+            android:text="@string/metal"
+            android:textColor="@color/buttonBackground"
+            android:textSize="10sp"
+            app:backgroundTint="@color/resButton"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/metal"
+            app:iconTint="@null" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnS"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/myfont"
+            android:text="@string/stone"
+            android:textColor="@color/buttonBackground"
+            android:textSize="10sp"
+            app:backgroundTint="@color/resButton"
+            app:cornerRadius="20dp"
+            app:icon="@drawable/stone"
+            app:iconTint="@null" />
+
+
+    </LinearLayout>
+
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
@@ -22,6 +95,7 @@
     </ScrollView>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/newTrade"
         android:fontFamily="@font/myfont"
         android:backgroundTint="@color/resButton"
         android:layout_width="164dp"

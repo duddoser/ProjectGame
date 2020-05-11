@@ -41,8 +41,9 @@ public class MainActivity extends AppCompatActivity implements NavigationHost, O
             transaction.addToBackStack(null);
         }
 
-        transaction.commit();
+        transaction.commitAllowingStateLoss();
     }
+
 
     @Override
     public void onBackPressed() {
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost, O
         } else {
             super.onBackPressed();
         }
+        mediaPlayer.start();
     }
 
     @Override
@@ -79,5 +81,6 @@ public class MainActivity extends AppCompatActivity implements NavigationHost, O
     public void pauseMediaPlayer() {
         mediaPlayer.pause();
     }
+
 }
 

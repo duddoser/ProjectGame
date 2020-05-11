@@ -30,7 +30,7 @@ import com.google.android.gms.maps.SupportMapFragment;
 
 public class GameFragment extends Fragment implements OnBackPressedListener, View.OnClickListener {
     private View view;
-    private Button btnMarket;
+    private Button btnMarket, btnDig;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -44,18 +44,19 @@ public class GameFragment extends Fragment implements OnBackPressedListener, Vie
     public void init_views(){
         btnMarket = view.findViewById(R.id.btnMarket);
         btnMarket.setOnClickListener(this);
+        btnDig = view.findViewById(R.id.btnDig);
+        btnDig.setOnClickListener(this);
     }
 
     @Override
-    public void onBackPressed() {
-        getChildFragmentManager().popBackStack();
-    }
+    public void onBackPressed() { getChildFragmentManager().popBackStack(); }
 
     @Override
     public void onClick(View v) {
         if (v == btnMarket){
-            ((MediaPlayerInterface) getActivity()).pauseMediaPlayer();
             ((NavigationHost) getActivity()).navigateTo(new MarketFragment(), true);
+        } else if (v == btnDig){
+            //add to user
         }
     }
 }

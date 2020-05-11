@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="120dp"
+    android:orientation="vertical"
+    android:background="@color/buttonBackground"
+    android:backgroundTint="@color/buttonBackground"
+    tools:context=".game.NewTradeFragment">
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="360dp"
+        android:layout_height="60dp">
+
+        <Spinner
+            android:id="@+id/materials"
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
+
+        <EditText
+            android:inputType="number"
+            android:id="@+id/num"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:textColor="@color/colorPrimaryDark"
+            android:layout_height="match_parent"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:textSize="32sp"
+            android:fontFamily="@font/myfont"
+            android:text="@string/tvFor"
+            android:layout_height="match_parent"/>
+
+        <Spinner
+            android:layout_weight="2"
+            android:id="@+id/materials2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
+
+        <EditText
+            android:inputType="number"
+            android:layout_weight="1"
+            android:textColor="@color/colorPrimaryDark"
+            android:id="@+id/num2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_width="120dp"
+        android:id="@+id/btnNewTrade"
+        android:text="@string/btnNewTrade"
+        android:backgroundTint="@color/recyclerView"
+        android:textSize="16sp"
+        android:fontFamily="@font/myfont"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"/>
+
+</LinearLayout>

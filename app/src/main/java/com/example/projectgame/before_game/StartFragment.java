@@ -24,7 +24,7 @@ import com.example.projectgame.game.GameFragment;
 
 public class StartFragment extends Fragment implements View.OnClickListener, OnBackPressedListener{
     private View view;
-    private Button startButton, settingsButton;
+    private Button startButton, settingsButton, quitButton;
     private MediaPlayer mediaPlayer;
     private SharedPreferences sharedPreferences;
 
@@ -35,9 +35,11 @@ public class StartFragment extends Fragment implements View.OnClickListener, OnB
 
         startButton = view.findViewById(R.id.start_button);
         settingsButton = view.findViewById(R.id.settings_button);
+        quitButton = view.findViewById(R.id.quit_button);
 
         startButton.setOnClickListener(this);
         settingsButton.setOnClickListener(this);
+        quitButton.setOnClickListener(this);
 
         return view;
     }
@@ -50,16 +52,17 @@ public class StartFragment extends Fragment implements View.OnClickListener, OnB
             } else {
                 ((NavigationHost) getActivity()).navigateTo(new LoginFragment(), false);
             }
-        }
-
-        if (v == settingsButton){
+        } else if (v == settingsButton){
             ((NavigationHost) getActivity()).navigateTo(new SettingsFragment(), true);
+        } else if (v == quitButton){
+            getActivity().finish();
         }
 
     }
 
     public boolean checkSharedPref(){
-        sharedPreferences = getActivity().getSharedPreferences("loginSettings", Context.MODE_PRIVATE);
+        sharedPreferences = getActivity().getSharedPreferences("loginSettings",
+                Context.MODE_PRIVATE);
 
         if (sharedPreferences.getBoolean("IS_LOGGED_IN", false)){
             return true;

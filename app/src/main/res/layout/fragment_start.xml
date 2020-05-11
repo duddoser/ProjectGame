@@ -7,36 +7,53 @@
     android:background="@drawable/startgame"
     tools:context=".before_game.StartFragment">
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/start_button"
-        android:layout_width="140dp"
-        android:layout_height="0dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="550dp"
-        android:layout_marginBottom="22dp"
-        android:text="@string/start_button"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="18sp"
-        app:fontFamily="@font/myfont"
-        app:backgroundTint="@color/buttonBackground"
-        app:layout_constraintBottom_toTopOf="@+id/settings_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/settings_button"
-        android:layout_width="140dp"
-        android:layout_height="0dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="79dp"
-        android:text="@string/settings_button"
-        android:textSize="16sp"
-        android:textColor="@color/colorPrimaryDark"
-        app:fontFamily="@font/myfont"
-        app:backgroundTint="@color/buttonBackground"
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="130dp"
+        android:layout_height="160dp"
+        android:layout_marginBottom="150dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/start_button" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/start_button"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/start_button"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="15sp"
+            app:backgroundTint="@color/buttonBackground"
+            app:fontFamily="@font/myfont" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/settings_button"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="3dp"
+            android:layout_weight="1"
+            android:text="@string/settings_button"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="14sp"
+            app:backgroundTint="@color/buttonBackground"
+            app:fontFamily="@font/myfont" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/quit_button"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginTop="3dp"
+            android:layout_weight="1"
+            android:text="@string/quit_button"
+            android:textColor="@color/colorPrimaryDark"
+            android:textSize="15sp"
+            app:backgroundTint="@color/buttonBackground"
+            app:fontFamily="@font/myfont" />
+
+    </LinearLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
