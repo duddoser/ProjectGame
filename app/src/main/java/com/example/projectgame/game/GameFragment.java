@@ -30,14 +30,16 @@ import com.google.android.gms.maps.SupportMapFragment;
 
 public class GameFragment extends Fragment implements OnBackPressedListener, View.OnClickListener {
     private View view;
-    private Button btnMarket, btnDig;
+    private Button btnMarket, btnDig, btnBuild;
+    private String districtRes;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_game, container, false);
         init_views();
-        new Maps(this, savedInstanceState);
+        Maps map = new Maps(this, savedInstanceState);
+        districtRes = map.new District(map.get_location()).getDistrict();
         return view;
     }
 
@@ -46,6 +48,8 @@ public class GameFragment extends Fragment implements OnBackPressedListener, Vie
         btnMarket.setOnClickListener(this);
         btnDig = view.findViewById(R.id.btnDig);
         btnDig.setOnClickListener(this);
+        btnBuild = view.findViewById(R.id.btnBuild);
+        btnBuild.setOnClickListener(this);
     }
 
     @Override
@@ -57,6 +61,8 @@ public class GameFragment extends Fragment implements OnBackPressedListener, Vie
             ((NavigationHost) getActivity()).navigateTo(new MarketFragment(), true);
         } else if (v == btnDig){
             //add to user
+        } else if (v == btnBuild){
+            ((NavigationHost) getActivity()).navigateTo(new BuildFragment(), true);
         }
     }
 }

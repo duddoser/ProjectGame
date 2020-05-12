@@ -81,6 +81,9 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
         });
     }
 
+    public Location get_location(){
+        return currentLocation;
+    }
     private void get_map() {
         MapView mView = this.gameFragment.getView().findViewById(R.id.map);
         mView.onCreate(savedInstanceState);
@@ -121,6 +124,31 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
                         PERMISSION_GRANTED){
                     fetchLastLocation(); }
                 break;
+        }
+    }
+
+    class District {
+        double longitude;
+        double latitude;
+        static final double LNG = 37.6156049;
+        static final double LTD = 55.7565494;
+
+        public District (Location location){
+            this.longitude = location.getLongitude();
+            this.latitude = location.getLatitude();
+        }
+
+        public String getDistrict(){
+            if (this.latitude >= LTD && this.longitude <= LNG){
+                return "wood";
+            } else if (this.latitude >= LTD && this.longitude >= LNG) {
+                return "stone";
+            } else if (this.latitude <= LTD && this.longitude >= LNG){
+                return "metal";
+            } else if (this.latitude <= LTD && this.longitude <= LNG){
+                return "iron";
+            }
+            return null;
         }
     }
 }

@@ -25,8 +25,7 @@ public class Coordinates {
     public void districtW(){
         Polygon polygon = this.googleMap.addPolygon(new PolygonOptions()
                 .add(new LatLng(55.7565494,37.6156049),
-                        new LatLng(55.713813,37.3836143),
-                        new LatLng(55.747447,37.3666513),
+                        new LatLng(55.7565494,37.369442), //new LatLng(55.747447,37.3666513),
                         new LatLng(55.786163,37.3682193),
                         new LatLng(55.790378,37.3710113),
                         new LatLng(55.800237,37.3805813),
@@ -44,9 +43,14 @@ public class Coordinates {
                         new LatLng(55.882601, 37.452988),
                         new LatLng(55.8846053,37.4747271),
                         new LatLng(55.890767, 37.493352),
-                        new LatLng(55.904503, 37.525038),
+                        new LatLng(55.904503, 37.525038), // 55.902557,37.6156049 - где должно закончиться
                         new LatLng(55.906351, 37.531791),
-                        new LatLng(55.90787,37.5409853)).
+                        new LatLng(55.90787,37.5409853),
+                        new LatLng(55.90787,37.5409853),
+                        new LatLng(55.911058, 37.574679),
+                        new LatLng(55.910900, 37.579976),
+                        new LatLng(55.910372, 37.585656),
+                        new LatLng(55.902557,37.6156049)).
                         strokeColor(context.getResources().getColor(R.color.polygonW)).
                         fillColor(context.getResources().getColor(R.color.polygonW)));
     }
@@ -54,10 +58,6 @@ public class Coordinates {
     public void districtS(){
         Polygon polygon = this.googleMap.addPolygon(new PolygonOptions()
                 .add(new LatLng(55.7565494,37.6156049),
-                        new LatLng(55.90787,37.5409853),
-                        new LatLng(55.911058, 37.574679),
-                        new LatLng(55.910900, 37.579976),
-                        new LatLng(55.910372, 37.585656),
                         new LatLng(55.902297, 37.616266),
                         new LatLng(55.899828, 37.627977),
                         new LatLng(55.897293, 37.644404),
@@ -74,9 +74,13 @@ public class Coordinates {
                         new LatLng(55.824303, 37.835243),
                         new LatLng(55.821481, 37.837222),
                         new LatLng(55.818196, 37.838091),
-                        new LatLng(55.813940, 37.838898),
+                        new LatLng(55.813940, 37.838898), // 55.7565494,37.842021
                         new LatLng(55.798438, 37.840186),
-                        new LatLng(55.776930, 37.842713)).
+                        new LatLng(55.776930, 37.842713),
+                        new LatLng(55.776930, 37.842713),
+                        new LatLng(55.772195, 37.843246),
+                        new LatLng(55.768867, 37.843087),
+                        new LatLng(55.7565494,37.842021)).
                         strokeColor(context.getResources().getColor(R.color.polygonS)).
                         fillColor(context.getResources().getColor(R.color.polygonS)));
     }
@@ -84,9 +88,7 @@ public class Coordinates {
     public void districtM(){
         Polygon polygon = this.googleMap.addPolygon(new PolygonOptions().
                 add(new LatLng(55.7565494,37.6156049),
-                        new LatLng(55.776930, 37.842713),
-                        new LatLng(55.772195, 37.843246),
-                        new LatLng(55.768867, 37.843087),
+                        new LatLng(55.7565494,37.842021),
                         new LatLng(55.742233, 37.841683),
                         new LatLng(55.715138, 37.838496),
                         new LatLng(55.713540, 37.837901),
@@ -115,12 +117,12 @@ public class Coordinates {
                         new LatLng(55.591751, 37.729446),
                         new LatLng(55.580747, 37.700905),
                         new LatLng(55.574352, 37.683606),
-                        new LatLng(55.573105, 37.678983),
+                        new LatLng(55.573105, 37.678983), //55.574806,37.6156049
                         new LatLng(55.572432, 37.674571),
                         new LatLng(55.571937, 37.670298),
                         new LatLng(55.572135, 37.663750),
-                        new LatLng(55.575580, 37.604812),
-                        new LatLng(55.576015, 37.596723)).
+                        new LatLng(55.574806,37.6156049),
+                        new LatLng(55.575580, 37.6156049)).
                         fillColor(context.getResources().getColor(R.color.polygonM))
                         .strokeColor(context.getResources().getColor(R.color.polygonM)));
     }
@@ -128,6 +130,7 @@ public class Coordinates {
     public void districtI(){
         Polygon polygon = this.googleMap.addPolygon(new PolygonOptions().
                 add(new LatLng(55.7565494,37.6156049),
+                        new LatLng(55.575580, 37.6156049),
                         new LatLng(55.576015, 37.596723),
                         new LatLng(55.576877, 37.590546),
                         new LatLng(55.594259, 37.517735),
@@ -152,7 +155,9 @@ public class Coordinates {
                         new LatLng(55.708332, 37.390521),
                         new LatLng(55.710260, 37.388365),
                         new LatLng(55.712019, 37.386766),
-                        new LatLng(55.713653, 37.385836)).
+                        new LatLng(55.713653, 37.385836),
+                        new LatLng(55.747447,37.3666513),
+                        new LatLng(55.7565494,37.369442)).
                         strokeColor(this.context.getResources().getColor(R.color.polygonI)).
                         fillColor(this.context.getResources().getColor(R.color.polygonI)));
     }

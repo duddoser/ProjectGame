@@ -17,7 +17,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.projectgame.R;
 
 import java.util.List;
-import java.util.zip.Inflater;
 
 public class ResourceAdapter extends RecyclerView.Adapter<ResourceAdapter.ViewHolder> {
     Context context;

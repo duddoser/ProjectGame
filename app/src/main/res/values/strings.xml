@@ -24,6 +24,10 @@
     <string name="btnNewTrade">Trade</string>
     <string name="tvFor">for</string>
 
+    <string name="build">Build</string>
+    <string name="Build">BUILD</string>
+    <string name="Built">BUILT</string>
+
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">hi</string>
 </resources>
