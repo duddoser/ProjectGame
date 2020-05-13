@@ -126,6 +126,7 @@
         android:layout_marginEnd="173dp"
         android:layout_marginBottom="156dp"
         app:iconTint="@null"
+        app:icon="@drawable/hammer"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnMarket"
         app:layout_constraintHorizontal_bias="1.0"

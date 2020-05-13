@@ -36,10 +36,11 @@ public class GameFragment extends Fragment implements OnBackPressedListener, Vie
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        Log.e("BBBBBBBB", "VVVVVVVVVVVVVVVVV");
         view = inflater.inflate(R.layout.fragment_game, container, false);
         init_views();
         Maps map = new Maps(this, savedInstanceState);
-        districtRes = map.new District(map.get_location()).getDistrict();
+        //districtRes = map.new District(map.get_location()).getDistrict();
         return view;
     }
 
