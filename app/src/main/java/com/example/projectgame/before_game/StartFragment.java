@@ -50,7 +50,7 @@ public class StartFragment extends Fragment implements View.OnClickListener, OnB
             if (checkSharedPref()){
                 ((NavigationHost) getActivity()).navigateTo(new GameFragment(), true);
             } else {
-                ((NavigationHost) getActivity()).navigateTo(new LoginFragment(), false);
+                ((NavigationHost) getActivity()).navigateTo(new LoginFragment(), true);
             }
         } else if (v == settingsButton){
             ((NavigationHost) getActivity()).navigateTo(new SettingsFragment(), true);
@@ -71,7 +71,5 @@ public class StartFragment extends Fragment implements View.OnClickListener, OnB
     }
 
     @Override
-    public void onBackPressed() {
-        getChildFragmentManager().popBackStack();
-    }
+    public void onBackPressed() { }
 }

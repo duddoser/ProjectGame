@@ -3,6 +3,7 @@ package com.example.projectgame.game;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.projectgame.OnBackPressedListener;
 import com.example.projectgame.R;
 
 import java.util.ArrayList;
@@ -18,7 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class BuildFragment extends Fragment {
+public class BuildFragment extends Fragment implements OnBackPressedListener {
     View view;
     private RecyclerView recyclerView;
     private BuildAdapter adapter;
@@ -98,4 +100,7 @@ public class BuildFragment extends Fragment {
         resources.put(consts.BIG_HOUSE,map7);
         resources.put(consts.CHURCH, map8);
     }
+
+    @Override
+    public void onBackPressed() { }
 }

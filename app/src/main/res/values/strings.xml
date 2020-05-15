@@ -9,9 +9,11 @@
     <string name="name">Name</string>
     <string name="password">Password</string>
     <string name="email">E-mail</string>
-    <string name="login">Login</string>
+    <string name="login">Log in</string>
     <string name="cancel">Cancel</string>
-    <string name="sign_up">I have already signed up</string>
+    <string name="sign_up">I have an account</string>
+    <string name="sign_in">Sign in</string>
+    <string name="changeAccount">Log in to another account</string>
 
     <string name="wood">wood</string>
     <string name="iron">iron</string>

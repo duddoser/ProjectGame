@@ -7,31 +7,19 @@
     android:background="@drawable/startgame"
     tools:context=".before_game.SettingsFragment">
 
-
-    <SeekBar
-        android:id="@+id/seekBar"
-        style="@style/Widget.AppCompat.SeekBar"
-        android:layout_width="179dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="516dp"
-        android:background="@color/buttonBackground"
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/btnChangeAcc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="224dp"
+        android:backgroundTint="@color/buttonBackground"
+        android:fontFamily="@font/myfont"
+        android:text="@string/changeAccount"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="124dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="114dp"
-        android:layout_marginBottom="7dp"
-        android:text="Volume"
-        android:textColor="@color/colorPrimaryDark"
-        android:textColorLink="#00070707"
-        android:textSize="26sp"
-        app:fontFamily="@font/myfont"
-        app:layout_constraintBottom_toTopOf="@+id/seekBar"
-        app:layout_constraintStart_toStartOf="@+id/seekBar"
-        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

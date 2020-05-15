@@ -55,6 +55,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
     private static final int REQUEST_CODE = 101;
     private Bundle savedInstanceState;
     private static final LatLng CENTRE = new LatLng(55.75222, 37.6155600);
+    private MapView mView;
 
 
     public Maps(GameFragment gameFragment, Bundle savedInstanceState){
@@ -85,7 +86,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
         return currentLocation;
     }
     private void get_map() {
-        MapView mView = this.gameFragment.getView().findViewById(R.id.map);
+        mView = this.gameFragment.getView().findViewById(R.id.map);
         mView.onCreate(savedInstanceState);
         mView.getMapAsync(this);
     }
@@ -105,6 +106,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
         } catch (Resources.NotFoundException e) {
             Log.e("MAPS RESOURCES", "Can't find style. Error: ", e);
         }
+        mView.onResume();
     }
 
     public void draw(GoogleMap gM){

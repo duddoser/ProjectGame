@@ -8,6 +8,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,18 +20,14 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import com.example.projectgame.OnBackPressedListener;
 import com.example.projectgame.R;
 
-public class NewTradeFragment extends DialogFragment implements View.OnClickListener {
+public class NewTradeFragment extends DialogFragment implements View.OnClickListener{
     View view;
     EditText eT1, eT2;
     Button btnTrade;
     Spinner spinner, spinner2;
-    MaterialModel materialModel;
-
-    public NewTradeFragment(MaterialModel materialModel){
-        this.materialModel = materialModel;
-    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -74,10 +71,6 @@ public class NewTradeFragment extends DialogFragment implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-//        materialModel.addAmount(Integer.parseInt(eT1.getText().toString()));
-//        materialModel.addAmount2(Integer.parseInt(eT2.getText().toString()));
-//        materialModel.addMaterial(spinner.getSelectedItem().toString());
-//        materialModel.addMaterial2(spinner2.getSelectedItem().toString());
         onDismiss(getDialog());
     }
 }

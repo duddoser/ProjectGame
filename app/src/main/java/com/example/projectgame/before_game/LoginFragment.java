@@ -11,12 +11,14 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.example.projectgame.Consts;
+import com.example.projectgame.OnBackPressedListener;
 import com.example.projectgame.R;
 
 
-public class LoginFragment extends Fragment implements View.OnClickListener {
+public class LoginFragment extends Fragment implements View.OnClickListener, OnBackPressedListener {
     private View view;
     private Button btnLogin, btnCancel;
     private EditText username, password, email;
@@ -43,10 +45,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         if (v == btnCancel){
-            // возврфщаемся обратно
+            onBackPressed();
         } else if (v == btnLogin){
-            retrofitProcess(this.username.getText().toString(), this.password.getText().toString(),
-                    this.email.getText().toString());
+            loginUser();
             //((NavigationHost) getActivity()).navigateTo(new GameFragment(), true);
         }
     }
@@ -71,7 +72,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 //                addConverterFactory(GsonConverterFactory.create()).build();
 //        RequestInterface requestInterface = retrofit.create(RequestInterface.class);
 //
-//        Log.e("RETROFIT", "CREATED SDFGSDFGDFGDFGSFDG");
 //
 //        User user = new User();
 //        user.setName(name);
@@ -106,5 +106,11 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 //
 //            }
 //        });
+    }
+
+    @Override
+    public void onBackPressed() {
+        FragmentManager fm = getActivity().getSupportFragmentManager();
+        fm.popBackStack();
     }
 }

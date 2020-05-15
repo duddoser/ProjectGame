@@ -10,11 +10,11 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import com.example.projectgame.before_game.StartFragment;
-import com.example.projectgame.game.MediaPlayerInterface;
 
 public class MainActivity extends AppCompatActivity implements NavigationHost, OnBackPressedListener,
         MediaPlayerInterface {
     private MediaPlayer mediaPlayer;
+    private int MAX_VOLUME=50;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +81,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost, O
     public void pauseMediaPlayer() {
         mediaPlayer.pause();
     }
+
 
 }
 

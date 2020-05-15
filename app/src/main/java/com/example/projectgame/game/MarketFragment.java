@@ -1,36 +1,23 @@
 package com.example.projectgame.game;
 
-import android.app.Dialog;
-import android.graphics.drawable.ColorDrawable;
-import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.SoundPool;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.Spinner;
-import android.widget.TextView;
 
-import com.example.projectgame.NavigationHost;
+import com.example.projectgame.MediaPlayerInterface;
 import com.example.projectgame.OnBackPressedListener;
 import com.example.projectgame.R;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MarketFragment extends Fragment implements OnBackPressedListener, View.OnClickListener {
@@ -41,15 +28,6 @@ public class MarketFragment extends Fragment implements OnBackPressedListener, V
     private ResourceAdapter adapter;
     private List<String> material, material2;
     private List<Integer> amount, amount2;
-    private MaterialModel materialModel;
-
-    public MarketFragment(){
-        materialModel = new MaterialModel(); // подключение к серверу!!!!
-    }
-
-    public MarketFragment(MaterialModel materialModel){
-        this.materialModel = materialModel;
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,21 +53,17 @@ public class MarketFragment extends Fragment implements OnBackPressedListener, V
     }
 
     @Override
-    public void onBackPressed() { }
+    public void onBackPressed() {}
 
     @Override
     public void onClick(View v) {
         if (v == btnNewTrade){
-            DialogFragment fragment = new NewTradeFragment(this.materialModel);
+            DialogFragment fragment = new NewTradeFragment();
             fragment.show(getFragmentManager(), "trade");
         }
     }
 
     public void setTrades(){
-        material = this.materialModel.getMaterial();
-        material2 = this.materialModel.getMaterial2();
-        amount = this.materialModel.getAmount();
-        amount2 = this.materialModel.getAmount();
         // доделать подключение к sql то же самое в newtradefragment
     }
 }

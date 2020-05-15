@@ -11,6 +11,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.util.Log;
@@ -32,12 +33,13 @@ public class GameFragment extends Fragment implements OnBackPressedListener, Vie
     private View view;
     private Button btnMarket, btnDig, btnBuild;
     private String districtRes;
+    private long startTime, endTime, duration;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.e("BBBBBBBB", "VVVVVVVVVVVVVVVVV");
         view = inflater.inflate(R.layout.fragment_game, container, false);
+        startTime = System.currentTimeMillis();
         init_views();
         Maps map = new Maps(this, savedInstanceState);
         //districtRes = map.new District(map.get_location()).getDistrict();
@@ -54,16 +56,24 @@ public class GameFragment extends Fragment implements OnBackPressedListener, Vie
     }
 
     @Override
-    public void onBackPressed() { getChildFragmentManager().popBackStack(); }
+    public void onBackPressed() {}
 
     @Override
     public void onClick(View v) {
         if (v == btnMarket){
             ((NavigationHost) getActivity()).navigateTo(new MarketFragment(), true);
         } else if (v == btnDig){
-            //add to user
+            endTime = System.currentTimeMillis();
+            duration = (endTime - startTime)/1000;
+            if (duration >= 10){
+                startTime = System.currentTimeMillis();
+            }
         } else if (v == btnBuild){
             ((NavigationHost) getActivity()).navigateTo(new BuildFragment(), true);
         }
+    }
+
+    public void getResource(){
+        //подключение к server
     }
 }
