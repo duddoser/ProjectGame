@@ -14,8 +14,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.projectgame.Consts;
+import com.example.projectgame.NavigationHost;
 import com.example.projectgame.OnBackPressedListener;
 import com.example.projectgame.R;
+import com.example.projectgame.RetrofitProcesses;
+import com.example.projectgame.game.GameFragment;
 
 
 public class LoginFragment extends Fragment implements View.OnClickListener, OnBackPressedListener {
@@ -24,6 +27,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, OnB
     private EditText username, password, email;
     private SharedPreferences sharedPreferences;
     public Consts consts;
+    public RetrofitProcesses retrofitProcesses;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -32,6 +36,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, OnB
         btnLogin = view.findViewById(R.id.login_button);
         btnCancel = view.findViewById(R.id.cancel_button);
 
+        //retrofitProcesses = new RetrofitProcesses(getActivity(), getContext());
         btnLogin.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
 
@@ -48,7 +53,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener, OnB
             onBackPressed();
         } else if (v == btnLogin){
             loginUser();
-            //((NavigationHost) getActivity()).navigateTo(new GameFragment(), true);
+            String name = username.getText().toString();
+            String pasw = password.getText().toString();
+            String mail = email.getText().toString();
+            if (!name.isEmpty() && !pasw.isEmpty() && !mail.isEmpty()){
+               retrofitProcesses.loginProcess(name, pasw, mail);
+            }
         }
     }
 
@@ -62,50 +72,6 @@ public class LoginFragment extends Fragment implements View.OnClickListener, OnB
         editor.putString("NAME", username.getText().toString());
         editor.putString("PASSWORD", password.getText().toString());
         editor.apply();
-    }
-
-    public void retrofitProcess(String name, String passw, String mail){
-//        Log.e("CHECK", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-//
-//        Retrofit retrofit = new Retrofit.Builder().
-//                baseUrl(consts.BASE_URL + consts.LOGIN).
-//                addConverterFactory(GsonConverterFactory.create()).build();
-//        RequestInterface requestInterface = retrofit.create(RequestInterface.class);
-//
-//
-//        User user = new User();
-//        user.setName(name);
-//        user.setPassword(passw);
-//        user.setEmail(mail);
-//        ServerRequest request = new ServerRequest();
-//        request.setOperation(consts.LOGIN_OPERATION);
-//        request.setUser(user);
-//        Call<ServerResponse> response = requestInterface.operation(request);
-//
-//        response.enqueue(new Callback<ServerResponse>() {
-//            @Override
-//            public void onResponse(Call<ServerResponse> call, Response<ServerResponse> response) {
-//                ServerResponse serverResponse = response.body(); // надо посмотреть как проходит связь с сервером
-//                if (serverResponse.getResult().equals(consts.SUCCESS)){
-//                    sharedPreferences = getActivity().getSharedPreferences("loginSettings",
-//                            Context.MODE_PRIVATE);
-//                    SharedPreferences.Editor editor = sharedPreferences.edit();
-//
-//                    editor.putBoolean("IS_LOGGED_IN", true);
-//                    editor.putString("E-MAIL", email.getText().toString());
-//                    editor.putString("NAME", username.getText().toString());
-//                    editor.putString("PASSWORD", password.getText().toString());
-//                    editor.apply();
-//
-//                    ((NavigationHost) getActivity()).navigateTo(new TestFragment(), true);
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<ServerResponse> call, Throwable t) {
-//
-//            }
-//        });
     }
 
     @Override

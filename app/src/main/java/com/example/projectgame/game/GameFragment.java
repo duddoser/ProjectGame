@@ -23,6 +23,7 @@ import android.widget.Button;
 import com.example.projectgame.NavigationHost;
 import com.example.projectgame.OnBackPressedListener;
 import com.example.projectgame.R;
+import com.example.projectgame.RetrofitProcesses;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapView;
@@ -34,6 +35,7 @@ public class GameFragment extends Fragment implements OnBackPressedListener, Vie
     private Button btnMarket, btnDig, btnBuild;
     private String districtRes;
     private long startTime, endTime, duration;
+    public RetrofitProcesses retrofitProcesses;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -41,6 +43,8 @@ public class GameFragment extends Fragment implements OnBackPressedListener, Vie
         view = inflater.inflate(R.layout.fragment_game, container, false);
         startTime = System.currentTimeMillis();
         init_views();
+        retrofitProcesses = new RetrofitProcesses(getActivity(), getContext());
+        retrofitProcesses.getResources();
         Maps map = new Maps(this, savedInstanceState);
         //districtRes = map.new District(map.get_location()).getDistrict();
         return view;

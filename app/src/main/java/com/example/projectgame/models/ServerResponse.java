@@ -1,4 +1,4 @@
-package com.example.projectgame.before_game.models;
+package com.example.projectgame.models;
 
 public class ServerResponse {
     private String result;
