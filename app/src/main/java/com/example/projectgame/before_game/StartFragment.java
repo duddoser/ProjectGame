@@ -47,7 +47,11 @@ public class StartFragment extends Fragment implements View.OnClickListener, OnB
     @Override
     public void onClick(View v) {
         if (v == startButton){
-            ((NavigationHost) getActivity()).navigateTo(new GameFragment(), true);
+            if (checkSharedPref()){
+                ((NavigationHost) getActivity()).navigateTo(new GameFragment(), true);
+            } else {
+                ((NavigationHost) getActivity()).navigateTo(new LoginFragment(), true);
+            }
         } else if (v == settingsButton){
             ((NavigationHost) getActivity()).navigateTo(new SettingsFragment(), true);
         } else if (v == quitButton){

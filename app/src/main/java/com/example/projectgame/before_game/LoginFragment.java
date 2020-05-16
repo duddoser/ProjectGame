@@ -36,7 +36,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener, OnB
         btnLogin = view.findViewById(R.id.login_button);
         btnCancel = view.findViewById(R.id.cancel_button);
 
-        //retrofitProcesses = new RetrofitProcesses(getActivity(), getContext());
+        retrofitProcesses = new RetrofitProcesses(getActivity());
         btnLogin.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
 
@@ -52,26 +52,13 @@ public class LoginFragment extends Fragment implements View.OnClickListener, OnB
         if (v == btnCancel){
             onBackPressed();
         } else if (v == btnLogin){
-            loginUser();
             String name = username.getText().toString();
             String pasw = password.getText().toString();
             String mail = email.getText().toString();
             if (!name.isEmpty() && !pasw.isEmpty() && !mail.isEmpty()){
-               retrofitProcesses.loginProcess(name, pasw, mail);
+               retrofitProcesses.loginProcess(name, pasw, mail, view);
             }
         }
-    }
-
-    public void loginUser(){
-        sharedPreferences = getActivity().getSharedPreferences("loginSettings",
-                Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-
-        editor.putBoolean("IS_LOGGED_IN", true);
-        editor.putString("E-MAIL", email.getText().toString());
-        editor.putString("NAME", username.getText().toString());
-        editor.putString("PASSWORD", password.getText().toString());
-        editor.apply();
     }
 
     @Override

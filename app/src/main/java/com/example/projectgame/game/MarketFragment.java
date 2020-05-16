@@ -18,6 +18,7 @@ import com.example.projectgame.MediaPlayerInterface;
 import com.example.projectgame.OnBackPressedListener;
 import com.example.projectgame.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class MarketFragment extends Fragment implements OnBackPressedListener, View.OnClickListener {
@@ -43,10 +44,20 @@ public class MarketFragment extends Fragment implements OnBackPressedListener, V
     }
 
     public void initRecycleAndViews(){
-        adapter = new ResourceAdapter(getContext(), material, amount, material2, amount2);
-        recyclerView = view.findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(adapter);
+        material = new ArrayList<>();
+        material2 = new ArrayList<>();
+        amount = new ArrayList<>();
+        amount2 = new ArrayList<>();
+        material.add("wood");
+        material2.add("metal");
+        amount.add(50);
+        amount2.add(50);
+        if (!material.isEmpty() && !material2.isEmpty() && !amount.isEmpty() && !amount2.isEmpty()){
+            adapter = new ResourceAdapter(getContext(), material, amount, material2, amount2);
+            recyclerView = view.findViewById(R.id.recyclerView);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            recyclerView.setAdapter(adapter);
+        }
 
         btnNewTrade = view.findViewById(R.id.newTrade);
         btnNewTrade.setOnClickListener(this);

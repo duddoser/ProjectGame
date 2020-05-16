@@ -3,6 +3,9 @@ package com.example.projectgame.models;
 import com.example.projectgame.models.ServerRequest;
 import com.example.projectgame.models.ServerResponse;
 import com.example.projectgame.models.ServerResponse;
+import com.google.gson.JsonObject;
+
+import java.util.HashMap;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -11,11 +14,17 @@ import retrofit2.http.POST;
 
 public interface RequestInterface {
     @POST("/login")
-    Call<ServerResponse> login(@Body ServerRequest request);
+    Call<JsonObject> login(@Body HashMap<String, String> json);
 
-    @GET("/auth")
-    Call<ServerResponse> auth(@Body ServerRequest request);
+    @POST("/auth")
+    Call<User> auth(@Body User user); //переделать
 
-    @GET("/resources")
-    Call<ResourceResponse> resources();
+    @POST("/get_id")
+    Call<JsonObject> get_id(@Body HashMap<String, String> json);
+
+    @POST("/resources")
+    Call<ResourceResponse> resources(@Body HashMap<String, String> json);
+
+    @POST("/change_res")
+    Call<JsonObject> change_res(@Body HashMap<String, String> json);
 }

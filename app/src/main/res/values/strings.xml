@@ -15,10 +15,10 @@
     <string name="sign_in">Sign in</string>
     <string name="changeAccount">Log in to another account</string>
 
-    <string name="wood">wood</string>
-    <string name="iron">iron</string>
-    <string name="stone">stone</string>
-    <string name="metal">metal</string>
+    <string name="wood">50</string>
+    <string name="iron">100</string>
+    <string name="stone">100</string>
+    <string name="metal">100</string>
 
     <string name="btnBuy">BUY</string>
     <string name="trade">Trade for</string>

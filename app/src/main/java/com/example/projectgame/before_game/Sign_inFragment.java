@@ -32,7 +32,7 @@ public class Sign_inFragment extends Fragment implements View.OnClickListener {
         String u_name = name.getText().toString();
         String pasw = password.getText().toString();
 
-        retrofitProcesses = new RetrofitProcesses(getActivity(), getContext());
+        retrofitProcesses = new RetrofitProcesses(getActivity());
         btnSign.setOnClickListener(v -> {
             if (!u_name.isEmpty() && !pasw.isEmpty()){
                // retrofitProcesses.authProcess(u_name, pasw);
