@@ -37,6 +37,7 @@ import com.google.android.material.snackbar.Snackbar;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -55,6 +56,7 @@ public class GameFragment extends Fragment implements OnBackPressedListener, Vie
     private RetrofitProcesses retrofitProcesses;
     private Retrofit retrofit;
     private SharedPreferences sharedPref;
+    private Random r;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,6 +80,7 @@ public class GameFragment extends Fragment implements OnBackPressedListener, Vie
 
     public void init_views(){
         consts = new Consts();
+        r = new Random();
 
         btnMarket = view.findViewById(R.id.btnMarket);
         btnMarket.setOnClickListener(this);
@@ -101,12 +104,13 @@ public class GameFragment extends Fragment implements OnBackPressedListener, Vie
         } else if (v == btnDig){
             endTime = System.currentTimeMillis();
             duration = (endTime - startTime)/1000;
-            if (duration >= 10){
+            if (duration >= 5){
                 startTime = System.currentTimeMillis();
-                updateResource();
-                setResources();
-                Snackbar.make(view, "You erned 10 " + districtRes + "!!!",
-                        Snackbar.LENGTH_SHORT).show();
+                int num = r.nextInt(10) + 15;
+                updateResource(num);
+                Snackbar.make(view, "You earned " + Integer.toString(num) + " " + districtRes
+                                + "!!!", Snackbar.LENGTH_SHORT).show();
+                setOneResource(districtRes, num);
             }
         } else if (v == btnBuild){
             ((NavigationHost) getActivity()).navigateTo(new BuildFragment(), true);
@@ -114,8 +118,8 @@ public class GameFragment extends Fragment implements OnBackPressedListener, Vie
     }
 
     public void authentification(){
-        Snackbar.make(view, "Hello " + sharedPref.getString("NAME", "admin"),
-                Snackbar.LENGTH_SHORT).show();
+        Snackbar.make(view, "Hello, " + sharedPref.getString("NAME", "admin") +
+                        "!", Snackbar.LENGTH_SHORT).show();
         String user = sharedPref.getString("NAME", "admin");
         String password = sharedPref.getString("PASSWORD", "admin");
 
@@ -143,10 +147,26 @@ public class GameFragment extends Fragment implements OnBackPressedListener, Vie
                 });
     }
 
-    public void updateResource(){
+    public void setOneResource(String res, int amount){
+        if (res.equals(consts.WOOD)){
+            int text = Integer.parseInt(btnWood.getText().toString());
+            btnWood.setText(String.valueOf(text + amount));
+        } else if (res.equals(consts.IRON)){
+            int text = Integer.parseInt(btnIron.getText().toString());
+            btnIron.setText(String.valueOf(text + amount));
+        } else if (res.equals(consts.METAL)){
+            int text = Integer.parseInt(btnMetal.getText().toString());
+            btnMetal.setText(String.valueOf(text + amount));
+        } else if (res.equals(consts.STONE)){
+            int text = Integer.parseInt(btnStone.getText().toString());
+            btnStone.setText(String.valueOf(text + amount));
+        }
+    }
+
+    public void updateResource(int n){
         SharedPreferences sharedPref = getActivity().
                 getSharedPreferences("loginSettings", Context.MODE_PRIVATE);
         String user_id = sharedPref.getString("USER_ID", "1111");
-        retrofitProcesses.changeResource(user_id, districtRes, 10);
+        retrofitProcesses.changeResource(user_id, districtRes, n);
     }
 }
