@@ -62,13 +62,13 @@ public class GameFragment extends Fragment implements OnBackPressedListener, Vie
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_game, container, false);
-        sharedPref = getActivity().getSharedPreferences("loginSettings", Context.MODE_PRIVATE);
+        sharedPref = getActivity().getSharedPreferences("loginSettings",
+                Context.MODE_PRIVATE);
         startTime = System.currentTimeMillis();
         init_views();
         retrofitProcesses = new RetrofitProcesses(getActivity());
         Maps map = new Maps(this, savedInstanceState);
         districtRes = map.getDistrict();
-        Log.e("OOOOOO", districtRes);
         return view;
     }
 
@@ -118,24 +118,13 @@ public class GameFragment extends Fragment implements OnBackPressedListener, Vie
     }
 
     public void authentification(){
-        Snackbar.make(view, "Hello, " + sharedPref.getString("NAME", "admin") +
-                        "!", Snackbar.LENGTH_SHORT).show();
-        String user = sharedPref.getString("NAME", "admin");
-        String password = sharedPref.getString("PASSWORD", "admin");
-
-        retrofitProcesses.getId(user, password, new RetrofitProcesses.IdCallback() {
-            @Override
-            public void onGetId(String user_id) {
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("USER_ID", user_id);
-                editor.apply();
-            }
-        });
+//        Snackbar.make(view, "Hello, " + sharedPref.getString("NAME", "admin") +
+//                        "!", Snackbar.LENGTH_SHORT).show();
         setResources();
     }
 
     public void setResources(){
-        retrofitProcesses.getResources(sharedPref.getString("USER_ID", "1111"),
+        retrofitProcesses.getResources(sharedPref.getString("USER_ID", "1"),
                 new RetrofitProcesses.ResourceCallbacks() {
                     @Override
                     public void onGetResources(Map<String, Integer> reses) {

@@ -1,7 +1,11 @@
 package com.example.projectgame.game;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -11,9 +15,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.projectgame.OnBackPressedListener;
 import com.example.projectgame.R;
+import com.example.projectgame.RetrofitProcesses;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,35 +31,54 @@ public class BuildFragment extends Fragment implements OnBackPressedListener {
     View view;
     private RecyclerView recyclerView;
     private BuildAdapter adapter;
-    private List<String> buildings;
+    private Button btnWood, btnIron, btnMetal, btnStone;
+    private List<String> buildings1;
     private Map<String, Integer> map1, map2, map3, map4, map5, map6, map7, map8;
     private Map<String, Map<String, Integer>> resources;
     public BuildAndResourceConstants consts = new BuildAndResourceConstants();
+    private RetrofitProcesses retrofitProcesses;
+    private Map<String, Integer> flags;
+    private SharedPreferences sharedPref;
+    private BuildFragment buildFragment = this;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_build, container, false);
+        retrofitProcesses = new RetrofitProcesses(getActivity());
+        sharedPref = getActivity().getSharedPreferences("loginSettings",
+                Context.MODE_PRIVATE);
         addResources();
         addBuildings();
-        adapter = new BuildAdapter(getContext(), buildings, resources);
-        recyclerView = view.findViewById(R.id.recyclerViewBuild);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(adapter);
+        initButtons();
+        setResources();
+        setFlags();
 
         return view;
     }
 
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+    }
+
+    public void initButtons(){
+        btnIron = view.findViewById(R.id.btnI);
+        btnWood = view.findViewById(R.id.btnW);
+        btnMetal = view.findViewById(R.id.btnM);
+        btnStone = view.findViewById(R.id.btnS);
+    }
+
     private void addBuildings(){
-        buildings = new ArrayList<>();
-        buildings.add(consts.TAWNHALL);
-        buildings.add(consts.BARRAKS);
-        buildings.add(consts.SHACK);
-        buildings.add(consts.FARM);
-        buildings.add(consts.HOUSE);
-        buildings.add(consts.WAREHOUSE);
-        buildings.add(consts.BIG_HOUSE);
-        buildings.add(consts.CHURCH);
+        buildings1 = new ArrayList<>();
+        buildings1.add(consts.TAWNHALL);
+        buildings1.add(consts.BARRAKS);
+        buildings1.add(consts.SHACK);
+        buildings1.add(consts.FARM);
+        buildings1.add(consts.HOUSE);
+        buildings1.add(consts.WAREHOUSE);
+        buildings1.add(consts.BIG_HOUSE);
+        buildings1.add(consts.CHURCH);
     }
 
     public void addResources(){
@@ -100,6 +126,65 @@ public class BuildFragment extends Fragment implements OnBackPressedListener {
         resources.put(consts.BIG_HOUSE,map7);
         resources.put(consts.CHURCH, map8);
     }
+
+    public void setFlags(){
+        String user_id = sharedPref.getString("USER_ID", "1");//ставить ресурсы
+        flags = new HashMap<>();
+        retrofitProcesses.get_buildings(user_id, new RetrofitProcesses.BuildingsCallbacks() {
+            @Override
+            public void onGetBuildings(Map<String, Double> buildings) {
+                for (String item: buildings.keySet()){
+                    flags.put(item, buildings.get(item).intValue());
+                }
+                adapter = new BuildAdapter(getContext(), buildings1, resources, flags, user_id,
+                        buildFragment);
+                recyclerView = view.findViewById(R.id.recyclerViewBuild);
+                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+                recyclerView.setAdapter(adapter);
+            }
+        });
+
+    }
+
+    public void setResources(){
+        retrofitProcesses.getResources(sharedPref.getString("USER_ID", "1"),
+                new RetrofitProcesses.ResourceCallbacks() {
+                    @Override
+                    public void onGetResources(Map<String, Integer> reses) {
+                        btnWood.setText(reses.get(consts.WOOD).toString());
+                        btnIron.setText(reses.get(consts.IRON).toString());
+                        btnMetal.setText(reses.get(consts.METAL).toString());
+                        btnStone.setText(reses.get(consts.STONE).toString());
+                    }
+                });
+    }
+
+    public void updateResources(String res1, String res2, String res3, int n1, int n2, int n3){
+        if (res1.equals(consts.METAL)){
+            int text = Integer.parseInt(btnMetal.getText().toString());
+            btnMetal.setText(String.valueOf(text + n1));
+        } else if (res1.equals(consts.IRON)){
+            int text = Integer.parseInt(btnIron.getText().toString());
+            btnIron.setText(String.valueOf(text + n1));
+        }
+
+        if (res2.equals(consts.WOOD)){
+            int text = Integer.parseInt(btnWood.getText().toString());
+            btnWood.setText(String.valueOf(text + n2));
+        } else if (res2.equals(consts.IRON)){
+            int text = Integer.parseInt(btnIron.getText().toString());
+            btnIron.setText(String.valueOf(text + n2));
+        }
+
+        if (res3.equals(consts.STONE)){
+            int text = Integer.parseInt(btnStone.getText().toString());
+            btnStone.setText(String.valueOf(text + n3));
+        } else if (res3.equals(consts.WOOD)){
+            int text = Integer.parseInt(btnWood.getText().toString());
+            btnWood.setText(String.valueOf(text + n3));
+        }
+    }
+
 
     @Override
     public void onBackPressed() { }

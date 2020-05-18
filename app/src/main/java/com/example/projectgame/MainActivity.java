@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
@@ -25,6 +27,15 @@ public class MainActivity extends AppCompatActivity implements NavigationHost, O
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mediaPlayer.setLooping(true);
         mediaPlayer.start();
+
+//        SharedPreferences sharedPreferences = this.getSharedPreferences("loginSettings",
+//                Context.MODE_PRIVATE);
+//        String user_id = sharedPreferences.getString("USER_ID", "2");
+//        RetrofitProcesses retrofitProcesses = new RetrofitProcesses(this);
+//        retrofitProcesses.changeResource(user_id, "wood", 2000);
+//        retrofitProcesses.changeResource(user_id, "iron", 2000);
+//        retrofitProcesses.changeResource(user_id, "stone", 2000);
+//        retrofitProcesses.changeResource(user_id, "metal", 2000);
 
         if (savedInstanceState == null){
             navigateTo(new StartFragment(), false);

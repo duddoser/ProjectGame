@@ -17,7 +17,7 @@ public interface RequestInterface {
     Call<JsonObject> login(@Body HashMap<String, String> json);
 
     @POST("/auth")
-    Call<User> auth(@Body User user); //переделать
+    Call<JsonObject> auth(@Body HashMap<String, String> json); //переделать
 
     @POST("/get_id")
     Call<JsonObject> get_id(@Body HashMap<String, String> json);
@@ -27,4 +27,10 @@ public interface RequestInterface {
 
     @POST("/change_res")
     Call<JsonObject> change_res(@Body HashMap<String, String> json);
+
+    @POST("/get_buildings")
+    Call<JsonObject> get_buildings(@Body HashMap<String, String> json);
+
+    @POST("/set_buildings")
+    Call<JsonObject> set_buildings(@Body HashMap<String, String> json);
 }

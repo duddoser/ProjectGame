@@ -20,18 +20,21 @@ import com.example.projectgame.R;
 import com.example.projectgame.before_game.LoginFragment;
 import com.example.projectgame.before_game.SettingsFragment;
 import com.example.projectgame.game.GameFragment;
+import com.google.android.material.snackbar.Snackbar;
 
 
 public class StartFragment extends Fragment implements View.OnClickListener, OnBackPressedListener{
     private View view;
     private Button startButton, settingsButton, quitButton;
     private MediaPlayer mediaPlayer;
-    private SharedPreferences sharedPreferences;
+    private SharedPreferences sharedPref;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_start, container, false);
+        sharedPref = getActivity().getSharedPreferences("loginSettings",
+                Context.MODE_PRIVATE);
 
         startButton = view.findViewById(R.id.start_button);
         settingsButton = view.findViewById(R.id.settings_button);
@@ -48,6 +51,8 @@ public class StartFragment extends Fragment implements View.OnClickListener, OnB
     public void onClick(View v) {
         if (v == startButton){
             if (checkSharedPref()){
+                Snackbar.make(view, "Hello, " + sharedPref.getString("NAME", "admin2") +
+                        "!", Snackbar.LENGTH_SHORT).show();
                 ((NavigationHost) getActivity()).navigateTo(new GameFragment(), true);
             } else {
                 ((NavigationHost) getActivity()).navigateTo(new LoginFragment(), true);
@@ -61,10 +66,7 @@ public class StartFragment extends Fragment implements View.OnClickListener, OnB
     }
 
     public boolean checkSharedPref(){
-        sharedPreferences = getActivity().getSharedPreferences("loginSettings",
-                Context.MODE_PRIVATE);
-
-        if (sharedPreferences.getBoolean("IS_LOGGED_IN", false)){
+        if (sharedPref.getBoolean("IS_LOGGED_IN", false)){
             return true;
         }
         return false;

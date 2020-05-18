@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.projectgame.game.BuildAndResourceConstants;
 import com.example.projectgame.game.GameFragment;
 import com.example.projectgame.models.MessageResponse;
 import com.example.projectgame.models.RequestInterface;
@@ -15,7 +16,9 @@ import com.example.projectgame.models.ServerRequest;
 import com.example.projectgame.models.ServerResponse;
 import com.example.projectgame.models.User;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.maps.DirectionsApi;
 
 import org.json.JSONObject;
 
@@ -39,10 +42,18 @@ public class RetrofitProcesses {
     // Interfaces that helps to return values from onResume()
     public interface ResourceCallbacks{ void onGetResources(Map<String, Integer> reses);}
     public interface IdCallback{ void onGetId(String user_id);}
+    public interface BuildingsCallbacks{ void onGetBuildings(Map<String, Double> buildings);}
 
     // Class's constructor
     public RetrofitProcesses(Activity activity){
         this.activity = activity;
+        retrofit = new Retrofit.Builder()
+                .baseUrl(consts.BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
+    }
+
+    public RetrofitProcesses(){
         retrofit = new Retrofit.Builder()
                 .baseUrl(consts.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
@@ -62,11 +73,11 @@ public class RetrofitProcesses {
         response.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                Log.i("Response", response.raw().toString());
+                Log.e("Response", response.raw().toString());
 
                 if (response.body().get("message").toString().contains("success")){
                     loginUser(email, username, password);
-                    Snackbar.make(view, "Hello, " + username + "!", Snackbar.LENGTH_LONG).show();
+                    Snackbar.make(view, "Hello, " + username + "!!!", Snackbar.LENGTH_LONG).show();
                     ((NavigationHost) activity).navigateTo(new GameFragment(), true);
                 } else {
                     Snackbar.make(view, "Account with this name already exists",
@@ -81,25 +92,49 @@ public class RetrofitProcesses {
         });
     }
 
-    // authProcess is used in GameFragment to connect to the server
-    public void authProcess(String username, String password, boolean toGameFragment){
+    // authProcess is used in Sign_inFragment to connect to the server
+    public void authProcess(String username, String password, View view){
         RequestInterface requestInterface = retrofit.create(RequestInterface.class);
-        User user = new User();
-        user.setName(username);
-        user.setPassword(password);
-        Call<User> response = requestInterface.auth(user);
+        HashMap<String, String> user = new HashMap<>();
+        user.put("username", username);
+        user.put("password", password);
+        Call<JsonObject> response = requestInterface.auth(user);
 
-        response.enqueue(new Callback<User>() {
+        response.enqueue(new Callback<JsonObject>() {
             @Override
-            public void onResponse(Call<User> call, Response<User> response) {
-                if (toGameFragment){
-                    ((NavigationHost) activity).navigateTo(new GameFragment(), true);
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                Log.e("AUUUUUUUUTH", response.raw().toString());
+                if (response.body().get("message").toString().contains("success")){
+                    getId(username, password, new IdCallback() {
+                        @Override
+                        public void onGetId(String user_id) {
+                            SharedPreferences sharedPreferences = activity.getSharedPreferences(
+                                    "loginSettings", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+
+                            editor.clear();
+                            editor.putBoolean("IS_LOGGED_IN", true);
+                            editor.putString("E-MAIL", "nothing"); //it's ok as email is never used
+                            editor.putString("NAME", username);
+                            editor.putString("PASSWORD", password);
+                            editor.putString("USER_ID", user_id);
+                            editor.apply();
+
+                            Snackbar.make(view, "Hello, " + username + "!!!",
+                                    Snackbar.LENGTH_SHORT).show();
+                            ((NavigationHost) activity).navigateTo(new GameFragment(),
+                                    true);
+                        }
+                    });
+                } else {
+                    Snackbar.make(view, "No account was found :(",
+                            Snackbar.LENGTH_SHORT).show();
                 }
             }
 
             @Override
-            public void onFailure(Call<User> call, Throwable t) {
-                Log.e("WTFFFF", t.toString());
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
             }
         });
     }
@@ -137,16 +172,23 @@ public class RetrofitProcesses {
 
     //loginUser adds new user's information to sharedPreferences
     public void loginUser(String email, String username, String password){
-        SharedPreferences sharedPreferences = this.activity.getSharedPreferences("loginSettings",
-                Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPreferences.edit();
-        editor.clear();
+        getId(username, password, new IdCallback() {
+            @Override
+            public void onGetId(String user_id) {
+                SharedPreferences sharedPreferences = activity.getSharedPreferences(
+                        "loginSettings", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.clear();
 
-        editor.putBoolean("IS_LOGGED_IN", true); //получить id
-        editor.putString("E-MAIL", email);
-        editor.putString("NAME", username);
-        editor.putString("PASSWORD", password);
-        editor.apply();
+                editor.putBoolean("IS_LOGGED_IN", true);
+                editor.putString("E-MAIL", email);
+                editor.putString("NAME", username);
+                editor.putString("PASSWORD", password);
+
+                editor.putString("USER_ID", user_id);
+                editor.apply();
+            }
+        });
     }
 
     //getId helps to return user_id by username and password
@@ -161,7 +203,7 @@ public class RetrofitProcesses {
         response.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                Log.e("RRRRRRRR", response.raw().toString());
+                Log.e("Response Id", response.raw().toString());
                 idCallback.onGetId(response.body().get("user_id").toString());
             }
 
@@ -197,6 +239,47 @@ public class RetrofitProcesses {
                 });
             }
         });
+    }
 
+    //get_buildings helps to get buildings from server
+    public void get_buildings(String user_id, BuildingsCallbacks buildingsCallbacks){
+        RequestInterface requestInterface = retrofit.create(RequestInterface.class);
+        HashMap<String, String> json = new HashMap<>();
+        json.put("user_id", user_id);
+        Call<JsonObject> response = requestInterface.get_buildings(json);
+
+        response.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                Log.e("Response", response.raw().toString());
+                Map<String, Double> resp = new Gson().fromJson(response.body().toString(),
+                        Map.class);
+                buildingsCallbacks.onGetBuildings(resp);
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) { }
+        });
+    }
+
+
+    public void set_buildings(String user_id, String building){
+        RequestInterface requestInterface = retrofit.create(RequestInterface.class);
+        HashMap<String, String> json = new HashMap<>();
+        json.put("user_id", user_id);
+        json.put("building", building);
+        Call<JsonObject> response = requestInterface.set_buildings(json);
+
+        response.enqueue(new Callback<JsonObject>() {
+            @Override
+            public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
+                Log.e("SEEEEET", response.raw().toString());
+            }
+
+            @Override
+            public void onFailure(Call<JsonObject> call, Throwable t) {
+
+            }
+        });
     }
 }
