@@ -23,7 +23,7 @@ import com.example.projectgame.game.GameFragment;
 
 public class LoginFragment extends Fragment implements View.OnClickListener, OnBackPressedListener {
     private View view;
-    private Button btnLogin, btnCancel;
+    private Button btnLogin, btnCancel, btnSignin;
     private EditText username, password, email;
     private SharedPreferences sharedPreferences;
     public Consts consts;
@@ -35,10 +35,12 @@ public class LoginFragment extends Fragment implements View.OnClickListener, OnB
         view = inflater.inflate(R.layout.fragment_login, container, false);
         btnLogin = view.findViewById(R.id.login_button);
         btnCancel = view.findViewById(R.id.cancel_button);
+        btnSignin = view.findViewById(R.id.btnAuth);
 
         retrofitProcesses = new RetrofitProcesses(getActivity());
         btnLogin.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
+        btnSignin.setOnClickListener(this);
 
         username = view.findViewById(R.id.name);
         password = view.findViewById(R.id.password);
@@ -58,6 +60,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener, OnB
             if (!name.isEmpty() && !pasw.isEmpty() && !mail.isEmpty()){
                retrofitProcesses.loginProcess(name, pasw, mail, view);
             }
+        } else if (v == btnSignin){
+            ((NavigationHost) getActivity()).navigateTo(new Sign_inFragment(), true);
         }
     }
 

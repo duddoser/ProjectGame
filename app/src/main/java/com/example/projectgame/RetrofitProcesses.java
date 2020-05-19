@@ -5,22 +5,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
-
-import com.example.projectgame.game.BuildAndResourceConstants;
 import com.example.projectgame.game.GameFragment;
-import com.example.projectgame.models.MessageResponse;
 import com.example.projectgame.models.RequestInterface;
 import com.example.projectgame.models.ResourceResponse;
-import com.example.projectgame.models.ServerRequest;
-import com.example.projectgame.models.ServerResponse;
-import com.example.projectgame.models.User;
 import com.google.android.material.snackbar.Snackbar;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.google.maps.DirectionsApi;
-
-import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,8 +21,8 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-/* RetrofitProcesses class has methods that simplifies work with connection to the server*/
 
+/* RetrofitProcesses class has methods that simplifies connection to the server*/
 public class RetrofitProcesses {
     Activity activity;
     Consts consts = new Consts();
@@ -273,7 +263,7 @@ public class RetrofitProcesses {
         response.enqueue(new Callback<JsonObject>() {
             @Override
             public void onResponse(Call<JsonObject> call, Response<JsonObject> response) {
-                Log.e("SEEEEET", response.raw().toString());
+                Log.i("Response", response.raw().toString());
             }
 
             @Override

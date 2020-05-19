@@ -2,7 +2,11 @@ package com.example.projectgame.game;
 
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.drawable.ColorDrawable;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,14 +24,25 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 
+import com.example.projectgame.MediaPlayerInterface;
 import com.example.projectgame.OnBackPressedListener;
 import com.example.projectgame.R;
+import com.example.projectgame.RetrofitProcesses;
+import com.google.android.material.snackbar.Snackbar;
+
+import java.util.Map;
 
 public class NewTradeFragment extends DialogFragment implements View.OnClickListener{
     View view;
     EditText eT1, eT2;
     Button btnTrade;
     Spinner spinner, spinner2;
+    GameFragment gameFragment;
+    MediaPlayer mP;
+
+    NewTradeFragment(GameFragment gameFragment){
+        this.gameFragment = gameFragment;
+    }
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -40,6 +55,10 @@ public class NewTradeFragment extends DialogFragment implements View.OnClickList
         builder.getWindow().setBackgroundDrawable(new ColorDrawable(android.
                 graphics.Color.TRANSPARENT));
         builder.setContentView(view);
+        ((MediaPlayerInterface) getActivity()).pauseMediaPlayer();
+        mP = MediaPlayer.create(getContext(), R.raw.opened_door);
+        mP.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mP.start();
         return builder;
     }
 
@@ -71,6 +90,41 @@ public class NewTradeFragment extends DialogFragment implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        onDismiss(getDialog());
+        String num1 = eT1.getText().toString();
+        String num2 = eT2.getText().toString();
+        if (!num1.isEmpty() && !num2.isEmpty()){
+            RetrofitProcesses retrofit = new RetrofitProcesses(getActivity());
+            SharedPreferences shared = getActivity().
+                    getSharedPreferences("loginSettings", Context.MODE_PRIVATE);
+            String user_id = shared.getString("USER_ID", "1");
+
+            retrofit.getResources(user_id, new RetrofitProcesses.ResourceCallbacks() {
+                @Override
+                public void onGetResources(Map<String, Integer> reses) {
+                    String res1 = spinner.getSelectedItem().toString();
+                    String res2 = spinner2.getSelectedItem().toString();
+                    if ((reses.get(res1) >= Integer.parseInt(num1)) &&
+                            (Integer.parseInt(num1) >= Integer.parseInt(num2))){ //1 текст. поле - то, что мы отдаем
+                        retrofit.changeResource(user_id, res1, -Integer.parseInt(num1));
+                        retrofit.changeResource(user_id, res2, Integer.parseInt(num2));
+                        gameFragment.setOneResource(res1, -Integer.parseInt(num1));
+                        gameFragment.setOneResource(res2, Integer.parseInt(num2));
+                    } else {
+                        gameFragment.makeSnackbar();
+                    }
+                }
+            });
+            onDismiss(getDialog());
+        } else {
+            Snackbar.make(view, "You can't trade empty string!!", Snackbar.LENGTH_SHORT)
+                    .show();
+        }
+
+    }
+
+    @Override
+    public void onDismiss(@NonNull DialogInterface dialog) {
+        super.onDismiss(dialog);
+        ((MediaPlayerInterface) getActivity()).resumeMediaPlayer();
     }
 }

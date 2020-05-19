@@ -12,6 +12,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -67,14 +68,14 @@ public class GameFragment extends Fragment implements OnBackPressedListener, Vie
         startTime = System.currentTimeMillis();
         init_views();
         retrofitProcesses = new RetrofitProcesses(getActivity());
-        Maps map = new Maps(this, savedInstanceState);
-        districtRes = map.getDistrict();
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Maps map = new Maps(this, savedInstanceState);
+        districtRes = map.getDistrict();
         authentification();
     }
 
@@ -100,7 +101,8 @@ public class GameFragment extends Fragment implements OnBackPressedListener, Vie
     @Override
     public void onClick(View v) {
         if (v == btnMarket){
-            ((NavigationHost) getActivity()).navigateTo(new MarketFragment(), true);
+            DialogFragment fragment = new NewTradeFragment(this);
+            fragment.show(getFragmentManager(), "trade");
         } else if (v == btnDig){
             endTime = System.currentTimeMillis();
             duration = (endTime - startTime)/1000;
@@ -111,6 +113,9 @@ public class GameFragment extends Fragment implements OnBackPressedListener, Vie
                 Snackbar.make(view, "You earned " + Integer.toString(num) + " " + districtRes
                                 + "!!!", Snackbar.LENGTH_SHORT).show();
                 setOneResource(districtRes, num);
+            } else {
+                Snackbar.make(view, "Wait for 5 second and you'll get your resource!",
+                        Snackbar.LENGTH_LONG).show();
             }
         } else if (v == btnBuild){
             ((NavigationHost) getActivity()).navigateTo(new BuildFragment(), true);
@@ -118,9 +123,13 @@ public class GameFragment extends Fragment implements OnBackPressedListener, Vie
     }
 
     public void authentification(){
-//        Snackbar.make(view, "Hello, " + sharedPref.getString("NAME", "admin") +
-//                        "!", Snackbar.LENGTH_SHORT).show();
         setResources();
+    }
+
+    public void makeSnackbar(){
+        Snackbar.make(view, "It is too little! Amount of resource you need should" +
+                        " be less or equal amount of resource you give",
+                Snackbar.LENGTH_LONG).show();
     }
 
     public void setResources(){

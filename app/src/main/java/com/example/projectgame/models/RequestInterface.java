@@ -1,15 +1,13 @@
 package com.example.projectgame.models;
 
-import com.example.projectgame.models.ServerRequest;
-import com.example.projectgame.models.ServerResponse;
-import com.example.projectgame.models.ServerResponse;
+
 import com.google.gson.JsonObject;
 
 import java.util.HashMap;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
-import retrofit2.http.GET;
 import retrofit2.http.POST;
 
 public interface RequestInterface {
