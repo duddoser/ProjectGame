@@ -7,11 +7,9 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,13 +18,14 @@ import android.widget.Button;
 import com.example.projectgame.OnBackPressedListener;
 import com.example.projectgame.R;
 import com.example.projectgame.RetrofitProcesses;
-import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/* BuildFragment is used to show the user buildings, that he can build (or can't). So
+* RecyclerView is the main part of this fragment.*/
 public class BuildFragment extends Fragment implements OnBackPressedListener {
     View view;
     private RecyclerView recyclerView;
@@ -62,6 +61,7 @@ public class BuildFragment extends Fragment implements OnBackPressedListener {
         super.onViewCreated(view, savedInstanceState);
     }
 
+    //here I init my buttons
     public void initButtons(){
         btnIron = view.findViewById(R.id.btnI);
         btnWood = view.findViewById(R.id.btnW);
@@ -69,6 +69,7 @@ public class BuildFragment extends Fragment implements OnBackPressedListener {
         btnStone = view.findViewById(R.id.btnS);
     }
 
+    //and here I add buildings to the List. the List is used in RecyclerView
     private void addBuildings(){
         buildings1 = new ArrayList<>();
         buildings1.add(consts.TAWNHALL);
@@ -81,6 +82,7 @@ public class BuildFragment extends Fragment implements OnBackPressedListener {
         buildings1.add(consts.CHURCH);
     }
 
+    //this method is used to add data to the HashMap, which is used in RecylcerView
     public void addResources(){
         resources = new HashMap<>();
 
@@ -127,6 +129,7 @@ public class BuildFragment extends Fragment implements OnBackPressedListener {
         resources.put(consts.CHURCH, map8);
     }
 
+    //here I check(by user_id), which buildings are already built by user
     public void setFlags(){
         String user_id = sharedPref.getString("USER_ID", "1");//ставить ресурсы
         flags = new HashMap<>();
@@ -146,6 +149,7 @@ public class BuildFragment extends Fragment implements OnBackPressedListener {
 
     }
 
+    //here I set user's amount of resources
     public void setResources(){
         retrofitProcesses.getResources(sharedPref.getString("USER_ID", "1"),
                 new RetrofitProcesses.ResourceCallbacks() {
@@ -159,6 +163,7 @@ public class BuildFragment extends Fragment implements OnBackPressedListener {
                 });
     }
 
+    //here I update user's amount of resources, after he builds a building
     public void updateResources(String res1, String res2, String res3, int n1, int n2, int n3){
         if (res1.equals(consts.METAL)){
             int text = Integer.parseInt(btnMetal.getText().toString());

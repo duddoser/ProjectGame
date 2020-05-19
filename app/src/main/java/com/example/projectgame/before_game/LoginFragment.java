@@ -1,7 +1,7 @@
 package com.example.projectgame.before_game;
 
 
-import android.content.Context;
+
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,9 +18,9 @@ import com.example.projectgame.NavigationHost;
 import com.example.projectgame.OnBackPressedListener;
 import com.example.projectgame.R;
 import com.example.projectgame.RetrofitProcesses;
-import com.example.projectgame.game.GameFragment;
 
 
+/* Fragment where new user can be added, or sign in*/
 public class LoginFragment extends Fragment implements View.OnClickListener, OnBackPressedListener {
     private View view;
     private Button btnLogin, btnCancel, btnSignin;

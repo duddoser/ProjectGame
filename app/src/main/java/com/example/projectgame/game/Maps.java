@@ -3,51 +3,28 @@ package com.example.projectgame.game;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
-import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.FragmentActivity;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.projectgame.R;
-import com.example.projectgame.game.GameFragment;
-import com.google.android.gms.common.api.ApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.MapView;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polygon;
-import com.google.android.gms.maps.model.PolygonOptions;
-import com.google.android.gms.maps.model.Polyline;
-import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.android.gms.tasks.Task;
-import com.google.maps.DirectionsApi;
-import com.google.maps.DirectionsApiRequest;
-import com.google.maps.GeoApiContext;
-import com.google.maps.model.DirectionsLeg;
-import com.google.maps.model.DirectionsResult;
-import com.google.maps.model.DirectionsRoute;
-import com.google.maps.model.DirectionsStep;
-import com.google.maps.model.EncodedPolyline;
-import com.google.maps.model.TravelMode;
 
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
+/* All GoogleMap functions are defined here. */
 public class Maps extends FragmentActivity implements OnMapReadyCallback {
     private GameFragment gameFragment;
     private Location currentLocation;
@@ -69,6 +46,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
         fetchLastLocation();
     }
 
+    //here we get currentLocation
     private void fetchLastLocation() {
         if (ActivityCompat.checkSelfPermission(this.gameFragment.getContext(),
                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
@@ -114,6 +92,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
         mView.onResume();
     }
 
+    //here we customize marker
     public void draw(GoogleMap gM){
         LatLng latLng = new LatLng(currentLocation.getLatitude(), currentLocation.getLongitude());
         MarkerOptions markerOptions = new MarkerOptions().position(latLng).
@@ -135,6 +114,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
 
     }
 
+    //and here we get the type of resource user can get
     public String getDistrict(){
         if (this.latitude >= LTD && this.longitude <= LNG){
             return "wood";

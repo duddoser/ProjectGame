@@ -4,18 +4,18 @@ package com.example.projectgame.models;
 import com.google.gson.JsonObject;
 
 import java.util.HashMap;
-import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 
+//this interface is a part of connection to the server (used in RetrofitProcesses class)
 public interface RequestInterface {
     @POST("/login")
     Call<JsonObject> login(@Body HashMap<String, String> json);
 
     @POST("/auth")
-    Call<JsonObject> auth(@Body HashMap<String, String> json); //переделать
+    Call<JsonObject> auth(@Body HashMap<String, String> json);
 
     @POST("/get_id")
     Call<JsonObject> get_id(@Body HashMap<String, String> json);

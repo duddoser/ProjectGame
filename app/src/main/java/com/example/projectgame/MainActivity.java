@@ -5,14 +5,21 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import com.example.projectgame.before_game.StartFragment;
 
+/* This is a simple android game, in which user can mine the resources and then build your
+* little kingdom. The type of resource you get depends on the district, where you are.
+* If the user don't have an opportunity to travel to another district, he can trade some resources
+* to obtain the one he need.*/
+
+/* Server part of the app runs on dudddoser.pythonanywhere.com/ */
+
+/* This app is based on fragments, so there is one Activity and many Fragments.
+* In MainActivity navigation between fragments and MediaPlayer customized methods are defined.*/
 public class MainActivity extends AppCompatActivity implements NavigationHost, OnBackPressedListener,
         MediaPlayerInterface {
     private MediaPlayer mediaPlayer;

@@ -1,23 +1,15 @@
 package com.example.projectgame.game;
 
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.media.AudioAttributes;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.media.SoundPool;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,25 +20,16 @@ import com.example.projectgame.NavigationHost;
 import com.example.projectgame.OnBackPressedListener;
 import com.example.projectgame.R;
 import com.example.projectgame.RetrofitProcesses;
-import com.example.projectgame.models.RequestInterface;
-import com.example.projectgame.models.ResourceResponse;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapFragment;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.material.snackbar.Snackbar;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 
+/* That is the central fragment of the game, where you can navigate to BuildFragment
+* and open NewTrade DialogFragment.*/
 public class GameFragment extends Fragment implements OnBackPressedListener, View.OnClickListener {
     private View view;
     private Button btnMarket, btnDig, btnBuild;
@@ -55,7 +38,6 @@ public class GameFragment extends Fragment implements OnBackPressedListener, Vie
     private Consts consts;
     private long startTime, endTime, duration;
     private RetrofitProcesses retrofitProcesses;
-    private Retrofit retrofit;
     private SharedPreferences sharedPref;
     private Random r;
 
@@ -79,6 +61,7 @@ public class GameFragment extends Fragment implements OnBackPressedListener, Vie
         authentification();
     }
 
+    //some views and classes are defined here
     public void init_views(){
         consts = new Consts();
         r = new Random();
@@ -106,7 +89,7 @@ public class GameFragment extends Fragment implements OnBackPressedListener, Vie
         } else if (v == btnDig){
             endTime = System.currentTimeMillis();
             duration = (endTime - startTime)/1000;
-            if (duration >= 5){
+            if (duration >= 5){      //the user can mine once in 5 seconds
                 startTime = System.currentTimeMillis();
                 int num = r.nextInt(10) + 15;
                 updateResource(num);
@@ -132,6 +115,7 @@ public class GameFragment extends Fragment implements OnBackPressedListener, Vie
                 Snackbar.LENGTH_LONG).show();
     }
 
+    //here I get amount of user's resources from database
     public void setResources(){
         retrofitProcesses.getResources(sharedPref.getString("USER_ID", "1"),
                 new RetrofitProcesses.ResourceCallbacks() {
@@ -145,6 +129,7 @@ public class GameFragment extends Fragment implements OnBackPressedListener, Vie
                 });
     }
 
+    //here I set amount of user's resources
     public void setOneResource(String res, int amount){
         if (res.equals(consts.WOOD)){
             int text = Integer.parseInt(btnWood.getText().toString());
@@ -161,6 +146,7 @@ public class GameFragment extends Fragment implements OnBackPressedListener, Vie
         }
     }
 
+    //here I change amount of user's resources in database
     public void updateResource(int n){
         SharedPreferences sharedPref = getActivity().
                 getSharedPreferences("loginSettings", Context.MODE_PRIVATE);

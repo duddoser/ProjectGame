@@ -1,5 +1,6 @@
 package com.example.projectgame.game;
 
+//Just a Constants class
 public class BuildAndResourceConstants {
     public static final String TAWNHALL = "Tawnhall";
     public static final String BARRAKS = "Barraks";

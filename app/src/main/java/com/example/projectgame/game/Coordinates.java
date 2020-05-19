@@ -1,7 +1,6 @@
 package com.example.projectgame.game;
 
 import android.content.Context;
-import android.graphics.Color;
 
 import com.example.projectgame.R;
 import com.google.android.gms.maps.GoogleMap;
@@ -9,6 +8,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
 
+//in this class resource districts are drawn
 public class Coordinates {
     private GoogleMap googleMap;
     private Context context;
@@ -22,10 +22,11 @@ public class Coordinates {
         districtI();
     }
 
+    //wood district
     public void districtW(){
         Polygon polygon = this.googleMap.addPolygon(new PolygonOptions()
                 .add(new LatLng(55.7565494,37.6156049),
-                        new LatLng(55.7565494,37.369442), //new LatLng(55.747447,37.3666513),
+                        new LatLng(55.7565494,37.369442),
                         new LatLng(55.786163,37.3682193),
                         new LatLng(55.790378,37.3710113),
                         new LatLng(55.800237,37.3805813),
@@ -55,6 +56,7 @@ public class Coordinates {
                         fillColor(context.getResources().getColor(R.color.polygonW)));
     }
 
+    //stone district
     public void districtS(){
         Polygon polygon = this.googleMap.addPolygon(new PolygonOptions()
                 .add(new LatLng(55.7565494,37.6156049),
@@ -85,6 +87,7 @@ public class Coordinates {
                         fillColor(context.getResources().getColor(R.color.polygonS)));
     }
 
+    //metal district
     public void districtM(){
         Polygon polygon = this.googleMap.addPolygon(new PolygonOptions().
                 add(new LatLng(55.7565494,37.6156049),
@@ -127,6 +130,7 @@ public class Coordinates {
                         .strokeColor(context.getResources().getColor(R.color.polygonM)));
     }
 
+    //iron district
     public void districtI(){
         Polygon polygon = this.googleMap.addPolygon(new PolygonOptions().
                 add(new LatLng(55.7565494,37.6156049),

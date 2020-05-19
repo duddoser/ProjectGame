@@ -3,6 +3,7 @@ package com.example.projectgame.models;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+//ResourceResponse class is used to deserialize json response
 public class ResourceResponse {
 
     @SerializedName("wood")

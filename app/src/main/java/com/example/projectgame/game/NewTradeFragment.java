@@ -11,12 +11,8 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
 
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -25,13 +21,13 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 
 import com.example.projectgame.MediaPlayerInterface;
-import com.example.projectgame.OnBackPressedListener;
 import com.example.projectgame.R;
 import com.example.projectgame.RetrofitProcesses;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.Map;
 
+/* This is the fragment, where user can trade resources.*/
 public class NewTradeFragment extends DialogFragment implements View.OnClickListener{
     View view;
     EditText eT1, eT2;
@@ -50,11 +46,13 @@ public class NewTradeFragment extends DialogFragment implements View.OnClickList
                 new LinearLayout(getActivity()), false);
         initSpinner();
         initViews();
+
         Dialog builder = new Dialog(getActivity());
         builder.requestWindowFeature(Window.FEATURE_NO_TITLE);
         builder.getWindow().setBackgroundDrawable(new ColorDrawable(android.
                 graphics.Color.TRANSPARENT));
         builder.setContentView(view);
+
         ((MediaPlayerInterface) getActivity()).pauseMediaPlayer();
         mP = MediaPlayer.create(getContext(), R.raw.opened_door);
         mP.setAudioStreamType(AudioManager.STREAM_MUSIC);
@@ -62,10 +60,11 @@ public class NewTradeFragment extends DialogFragment implements View.OnClickList
         return builder;
     }
 
+    //views are initialized here
     public void initViews(){
         eT1 = view.findViewById(R.id.num);
         eT2 = view.findViewById(R.id.num2);
-        btnTrade = view.findViewById(R.id.btnNewTrade); //пренеси все материал листы в отдельный класс
+        btnTrade = view.findViewById(R.id.btnNewTrade);
         btnTrade.setOnClickListener(this);
     }
 
@@ -74,6 +73,7 @@ public class NewTradeFragment extends DialogFragment implements View.OnClickList
         super.onAttach(context);
     }
 
+    //spinners are initialized here
     public void initSpinner(){
         String[] materials = {"wood", "stone", "iron", "metal"};
         spinner = (Spinner) view.findViewById(R.id.materials);
@@ -99,6 +99,7 @@ public class NewTradeFragment extends DialogFragment implements View.OnClickList
             String user_id = shared.getString("USER_ID", "1");
 
             retrofit.getResources(user_id, new RetrofitProcesses.ResourceCallbacks() {
+
                 @Override
                 public void onGetResources(Map<String, Integer> reses) {
                     String res1 = spinner.getSelectedItem().toString();

@@ -4,18 +4,14 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.service.autofill.OnClickAction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.projectgame.NavigationHost;
 import com.example.projectgame.R;
 import com.example.projectgame.RetrofitProcesses;
-import com.example.projectgame.game.GameFragment;
 
 public class Sign_inFragment extends Fragment implements View.OnClickListener {
     View view;

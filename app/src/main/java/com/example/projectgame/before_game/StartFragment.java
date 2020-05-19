@@ -3,12 +3,10 @@ package com.example.projectgame.before_game;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,16 +15,14 @@ import android.widget.Button;
 import com.example.projectgame.NavigationHost;
 import com.example.projectgame.OnBackPressedListener;
 import com.example.projectgame.R;
-import com.example.projectgame.before_game.LoginFragment;
-import com.example.projectgame.before_game.SettingsFragment;
 import com.example.projectgame.game.GameFragment;
 import com.google.android.material.snackbar.Snackbar;
 
 
+/* This is the first fragment, that user sees.*/
 public class StartFragment extends Fragment implements View.OnClickListener, OnBackPressedListener{
     private View view;
     private Button startButton, settingsButton, quitButton;
-    private MediaPlayer mediaPlayer;
     private SharedPreferences sharedPref;
 
     @Override

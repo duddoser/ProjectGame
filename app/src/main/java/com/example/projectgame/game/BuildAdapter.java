@@ -22,6 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+//this is a RecyclerView adapter that is used in BuildFragment
 public class BuildAdapter extends RecyclerView.Adapter<BuildAdapter.ViewHolder> {
     public Context context;
     public List<String> buildings;
@@ -221,6 +222,7 @@ public class BuildAdapter extends RecyclerView.Adapter<BuildAdapter.ViewHolder> 
         }
     }
 
+    //this method helps to get Drawable by String
     public Drawable imageSelect(String resource) {
         switch (resource) {
             case "Shack":
